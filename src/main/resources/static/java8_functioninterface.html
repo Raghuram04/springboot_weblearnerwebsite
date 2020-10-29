@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebLearner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+body {
+	background-color: #ebebe0;
+}
+
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+
+	<div class="container addmargin">
+
+		<!-- Topic Heading Start -->
+
+		<h2>Java8 - Features - FunctionInterface and Lambda Expression</h2>
+
+		<!-- Topic Heading end -->
+
+		<!-- Overview Start -->
+		<div class="row addmargin overview"></div>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				In this tutorial, we are going to see the use of <b>FunctionalInterface
+					and Lambda Expression</b> introduced in Java 8. Interface with one
+				abstract method is called Function Interface. Example
+				Callable,Runnable etc. We can define our own interface as Function
+				Interface using <b>@FunctionalInterface</b> annotation. Lambda is an
+				anonymous function without name and doesn't belong to any class.
+			</div>
+		</div>
+
+		<div class="row addmargin overview">
+			<div class="col">
+				Before we proceed with actual example to use Lambda and Functional
+				Interface, We will see how to write lambda expression. we will
+				compare with traditional method. In below example we have <b>add(int
+					a , int b)</b> method returning integer value.We can remove name of the
+				method and <b>return</b> keyword. Since we have only one statement
+				we dont need curly bracket too.
+				<pre class="brush: java; addmargin">
+	// traditional method
+	
+	public int add(int a,int b) {
+		return a+b;
+	}
+	
+	//equivalent Lambda expession for above method
+
+	(a,b) -> a+b;
+				</pre>
+
+			</div>
+		</div>
+
+		<h4>Lambda Expression without Argument</h4>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				We have created a simple functional Interface <b>FunctionalInterfaceExample</b>
+				with one abstract method as below.
+				<pre class="brush: java; addmargin">
+				
+@FunctionalInterface
+public interface FunctionalInterfaceExample {	
+	public void test();
+}</pre>
+
+				<b>FunctionalInterfaceNoArgExample</b> class defines the lambda
+				expression for this FuntionInterface without argument. As this
+				method doesn't return anything, we are having a print statement.
+
+				<pre class="brush: java; addmargin">
+public class FunctionalInterfaceNoArgExample {
+
+	public static void main(String[] args) {
+
+		FunctionalInterfaceExample withoutArg = () -> System.out
+				.println("Example of functional interface without argument");
+		
+		withoutArg.test();
+		
+	}
+}
+
+
+</pre>
+
+				<h4>Output</h4>
+
+				<pre class="brush: java; addmargin">
+Example of functional interface without argument
+</pre>
+			</div>
+		</div>
+
+		<h4>Lambda Expression with Argument</h4>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				Another FunctionInterface class is created to demonstrate argument
+				Lambda Expression as below.
+				<pre class="brush: java; addmargin">
+				
+public interface FunctionalInterfaceExample2 {	
+	public int add(int a,int b);
+}</pre>
+
+				<b>FunctionalInterfaceArgumentExample</b> class defines the lambda
+				expression for this FuntionInterface with argument. In this case, we
+				are adding two integer and returning a integer.
+
+				<pre class="brush: java; addmargin">
+public class FunctionalInterfaceArgumentExample {
+
+	public static void main(String[] args) {
+
+		FunctionalInterfaceExample2 withArg = (a, b) -> a + b;
+		System.out.println("Functional Interface with argument  ->" + withArg.add(5, 3));	
+		
+	}
+}</pre>
+
+				<h4>Output</h4>
+
+				<pre class="brush: java; addmargin">
+Functional Interface with argument ->8
+</pre>
+			</div>
+		</div>
+
+		<h4>Lambda Expression For Runnable</h4>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				Since Runnable Interface is a FunctionInterface, we can use Lambda
+				expression to define the <b>run()</b> method.
+				<pre class="brush: java; addmargin">
+public class FunctionalInterfaceThreadExample {
+
+	public static void main(String[] args) {
+		Runnable t = () -> System.out
+				.println("Thread example. Runnable is a functional interface with only run() abstract method");
+
+		new Thread(t).start();		
+	}
+}</pre>
+				<h4>Output</h4>
+
+				<pre class="brush: java; addmargin">
+Thread example. Runnable is a functional interface with only run() abstract method
+</pre>
+			</div>
+		</div>
+
+		<div class="row addmargin overview">
+			<div class="col">Lambda expression helps to minimize the lines
+				of code and more readable. We can define the functionality in any
+				place without the need for any class definition</div>
+		</div>
+
+
+
+
+
+		<!-- Result End -->
+
+		<!-- Footer Start -->
+
+		<h4>Related Links</h4>
+		<div class="row addmargin">
+			<div col="">
+				<ul>
+					<li><a href="http://localhost:8081/java8_foreach.html"
+						target="_blank">Java8 - forEach Iterator</a></li>
+					<li><a
+						href="http://localhost:8081/java8_defaultinterface.html"
+						target="_blank">Java8 - Default Method in Interface</a></li>
+					<li><a href="http://localhost:8081/java8_stream.html"
+						target="_blank">Java8 - Streams</a></li>
+					<li><a href="http://localhost:8081/java8_timeapi.html"
+						target="_blank">Java8 - Time API</a></li>
+				</ul>
+
+			</div>
+		</div>
+
+
+		<div id="author"></div>
+		<br> <br>
+		<div id="footer"></div>
+
+
+
+
+		<!-- Footer End -->
+
+		<script type="text/javascript">
+			SyntaxHighlighter.all();
+		</script>
+</body>
+</html>
+
+

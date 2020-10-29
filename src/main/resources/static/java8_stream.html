@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebLearner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+body {
+	background-color: #ebebe0;
+}
+
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+
+	<div class="container addmargin">
+
+		<!-- Topic Heading Start -->
+
+		<h2>Java8 - Stream</h2>
+
+		<!-- Topic Heading end -->
+
+		<!-- Overview Start -->
+		<div class="row addmargin overview"></div>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				In this tutorial, We are going to see the <b>Stream </b> Interface
+				introduced in Java8. We will cover the useful methods available with
+				this interface.
+			</div>
+		</div>
+
+		<div class="row addmargin overview">
+
+			<div class="col">Stream is not a data structure, its a
+				interface used to process collection of objects like
+				Arrays,Collection (List,Set etc),Java NIO Operation. Stream provide
+				pipeline options to build our operation on the top of another
+				operation Resultset.</div>
+		</div>
+
+		<h4>Types of Operations</h4>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				<ul>
+					<li><b>Intermediate Operation</b><br> Returns a modified
+						Stream Object after some operation. We can pipeline on top of the
+						modified Stream object . We keep on chaining on the modified
+						response till we get desired output. Example of Intermediate
+						Operators are <b>map(),filter(),sorted()</b>
+					<li><b>Terminal Operation</b><br> Returns the final
+						response. No more chaining after the terminal method. We can have
+						only one terminal method on the given operation.Example of
+						Terminal Operation are <b>collect,forEach,reduce</b>
+				</ul>
+			</div>
+		</div>
+
+		<h4>Common Methods</h4>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				<ul>
+					<li><b>count():</b> Returns the count of element in the given
+						collection</li>
+					<li><b>distinct():</b> Returns distinct element in the given
+						collection.
+					<li><b>parallelStream():</b> Helps to parallel process the
+						elements in the given collection. We can use this when the order
+						of element processing can be random.</li>
+					<li><b>filter():</b> Returns a modified Stream based on the
+						given filter condition.</li>
+					<li><b>map():</b> Returns a modified Stream based on the given
+						map condition.Mostly returns the same Stream with modified value.</li>
+					<li><b>match():</b> Returns a boolean value. We have two
+						methods anyMatch() and allMatch() returning boolean value based on
+						the condition.</li>
+					<li><b>reduce():</b> Reduce the given Stream into one value.</li>
+					<li><b>collect():</b> Collect the results of intermediate
+						operation. Mostly used with <b>Collectors</b> class to collect the
+						value in particular format like toList(),toSet()</li>
+				</ul>
+			</div>
+		</div>
+
+		<h4>Example Program with all the operations.</h4>
+		<div class="row addmargin overview">
+
+			<div class="col">
+
+				<pre class="brush: java; addmargin">	
+public class StreamExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		List<String> stringLst = new ArrayList<>();
+		stringLst.add("Sam");
+		stringLst.add("Tom");
+		stringLst.add("Peter");
+		stringLst.add("Peter");
+
+		List<Integer> intLst = new ArrayList<>();
+		intLst.add(1);
+		intLst.add(10);
+		intLst.add(8);
+		intLst.add(5);
+
+		// Array example
+		
+		System.out.println("Array Example -->");
+
+		String[] arr = new String[] { "Sam", "Tom", "Peter" };
+		Stream<String> arrStream = Arrays.stream(arr);
+		arrStream.forEach(s -> System.out.println(s));
+
+		// count example
+
+		System.out.println("Count Example -->" + stringLst.stream().count());
+
+		// distinct example
+
+		System.out.println("distinct example -->" + stringLst.stream().distinct().count());
+
+		// parallel Stream example
+
+		System.out.println("parallelStream example");
+
+		stringLst.parallelStream().forEach(s -> System.out.println(s));
+
+		// filter example
+
+		System.out.println("filter example");
+
+		stringLst.stream().filter(s -> s.startsWith("P")).forEach(s -> System.out.println(s));
+
+		// map
+
+		System.out.println("map example");
+
+		Stream<Integer> mapExampleStream = intLst.stream().map(i -> i * 10);
+		mapExampleStream.forEach(i -> System.out.println(i));
+
+		// match
+
+		System.out.println("Any Match example -->  " + stringLst.stream().anyMatch(s -> s.startsWith("P")));
+		System.out.println("All Match example -->  " + stringLst.stream().allMatch(s -> s.startsWith("P")));
+
+		// reduce
+
+		System.out.println("Reduce Example -->" + intLst.stream().reduce(0, (i, j) -> i + j));
+
+		// collect
+		
+		System.out.println("collect example");
+
+		List<String> collectExample = stringLst.stream().map(s -> s.toLowerCase()).collect(Collectors.toList());
+		collectExample.parallelStream().forEach(s -> System.out.println(s));
+
+	}
+
+}
+				</pre>
+			</div>
+		</div>
+
+		<h4>Result</h4>
+		<!-- Overview End -->
+		<div class="row addmargin">
+
+			<div class="col">
+				<pre class="brush: java; addmargin">				
+Array Example -->
+Sam
+Tom
+Peter
+Count Example -->4
+distinct example -->3
+parallelStream example
+Peter
+Peter
+Tom
+Sam
+filter example
+Peter
+Peter
+map example
+10
+100
+80
+50
+Any Match example -->  true
+All Match example -->  false
+Reduce Example -->24
+collect example
+peter
+tom
+sam
+peter
+</pre>
+
+			</div>
+		</div>
+
+
+
+		<!-- Result End -->
+
+		<!-- Footer Start -->
+
+		<h4>Related Links</h4>
+		<div class="row addmargin">
+			<div col="">
+				<ul>
+					<li><a href="http://localhost:8081/java8_foreach.html"
+						target="_blank">Java8 - forEach Iterator</a></li>
+					<li><a
+						href="http://localhost:8081/java8_defaultinterface.html"
+						target="_blank">Java8 - Default Method in Interface</a></li>
+					<li><a
+						href="http://localhost:8081/java8_functioninterface.html"
+						target="_blank">Java8 - Function Interface and Lambda</a></li>
+					<li><a href="http://localhost:8081/java8_timeapi.html"
+						target="_blank">Java8 - Time API</a></li>
+				</ul>
+
+			</div>
+		</div>
+
+		<div id="author"></div>
+		<br> <br>
+		<div id="footer"></div>
+
+
+
+
+		<!-- Footer End -->
+
+		<script type="text/javascript">
+			SyntaxHighlighter.all();
+		</script>
+</body>
+</html>
+
+

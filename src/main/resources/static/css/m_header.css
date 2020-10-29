@@ -1,0 +1,56 @@
+.navbar-custom {
+	background-color: #FFFFFF;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,.navbar-custom .navbar-text {
+	text-decoration: none;
+	color: #483D8B;
+}
+
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+	text-decoration: none;
+	color: #483D8B;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,.navbar-custom {
+	text-decoration: none;
+	color: #483D8B;
+}
+
+.nav-item .nav-link:hover {
+	text-decoration: none;
+	color: #ff0000;
+}
+
+/* for dropdown only - change the color of dropdown */
+.navbar-custom .dropdown-menu {
+	background-color: #3193de;
+}
+
+.navbar-custom .dropdown-item {
+	text-decoration: none;
+	color: #fff;
+}
+
+.navbar-custom .dropdown-item:hover,.navbar-custom .dropdown-item:focus
+	{
+	text-decoration: none;
+	color: #ff0000;
+	background-color: #483D8B;
+}
+
+.navbar-toggler-icon {
+	color: #483D8B;
+}
+
+.navbar-nav { /* flex-flow: row nowrap; */
+	
+}
+
+.navbar-toggler-icon {
+	background-image:
+		url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(72,61,139)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}

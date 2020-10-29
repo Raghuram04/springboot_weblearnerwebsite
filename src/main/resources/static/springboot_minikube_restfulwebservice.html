@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebLearner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+body {
+	background-color: #ebebe0;
+}
+</style>
+
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+
+	<div class="container addmargin">
+
+		<!-- Topic Heading Start -->
+
+		<h2>Spring Restful Service - Spring Boot - MiniKube
+			Kubernetes(K8s)</h2>
+
+		<!-- Topic Heading end -->
+
+		<!-- Overview Start -->
+		<div class="row addmargin overview"></div>
+		<h4>Overview</h4>
+		<div class="row addmargin overview">
+
+			<div class="col">
+				Kubernetes is a container orchestration system used to manage
+				application deployment,scaling etc. To have a local setup for easy
+				understanding , we can use <b>Minikube</b>.We need a virtual machine
+				environment to use minikube. Therefore,we are going to use Oracle
+				Virtual box in this tutorial.
+			</div>
+		</div>
+
+		<!-- Overview End -->
+
+		<!-- Demo Start -->
+		<h4>About Demo</h4>
+
+		<div class="row addmargin demodetails">
+
+			<div class="col">
+				In this demo, we will focus on deploying a restful service in
+				minikube. We already created a <a href="" target="_blank">restful
+					webservice</a> in our spring boot series. Below are the steps.
+				<ul>
+					<li>We will add a <b>DOCKERFILE</b> to the restful webservice
+					</li>
+					<li>We will build docker image and push the image to <b>Docker
+							Hub</b></li>
+					<li>We will pull the image from Docker Hub and deploy in
+						minikube</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Demo end -->
+
+		<!-- Prerequisites Start -->
+
+		<h4>Prerequisites</h4>
+
+		<div class="row addmargin prerequisites">
+
+			<div class="col">
+				<ul>
+					<li>Oracle Virtual Box - <a
+						href="https://www.virtualbox.org/manual/ch02.html">
+							Installation Link</a></li>
+					<li>Minikube - <a
+						href="https://minikube.sigs.k8s.io/docs/start/"> Installation
+							Link</a></li>
+					<li>Docker Hub -<a href="https://hub.docker.com/">Create
+							Account</a></li>
+					<li>Java 8</li>
+					<li>Maven</li>
+					<li>Eclipse</li>
+					<li>Git Bash</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Prerequisites Stop -->
+
+		<!-- pom start -->
+
+		<h4>DockerFile</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				We need to create a binary image of the webservice application to
+				deploy in container based platform like kubernetes. Below is the
+				sample DockerFile for our application
+				<pre class="brush: java; addmargin">
+FROM openjdk:8-jdk-alpine
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} weblearner.jar
+ENTRYPOINT ["java","-jar","/weblearner.jar"]
+				</pre>
+
+			</div>
+		</div>
+
+		<!-- pom end -->
+
+		<!-- Topic 1 Start-->
+
+		<h4>Docker Hub</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				Create a account in <a href="https://hub.docker.com/">Docker Hub</a>.
+				Once you login, Create a repository to push your image. In our case,
+				we have created a repository named as weblearnerrepo. We will push
+				our image to this repository.
+			</div>
+
+		</div>
+
+		<!-- Topic 1 End-->
+		<!-- Topic 2 Start -->
+		<h4>Image Build and Push</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				We are going to build the image of the webservice using Docker
+				commands and push to docker hub.
+
+				<pre class="brush: java; addmargin" style="background-color: white">
+                 docker login
+                 docker build -t weblearnerrepo:v1 .
+                 docker tag weblearnerrepo:v1 raghuram04/weblearnerrepo
+                 docker push raghuram04/weblearnerrepo
+                 </pre>
+			</div>
+
+			<img src="img/dockerimage.PNG" class="output">
+		</div>
+
+		<h4>MiniKube</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				We will start the minikube from command prompt. Navigate to <b>minikube.exe</b>
+				file and use this command <b>"minikube start"</b>. Please see the
+				below Yaml for creating pod and service to access the pod.<br>
+
+				<h4>Pod Definition</h4>
+
+
+				<pre class="brush: java; addmargin" style="background-color: white">
+apiVersion: v1
+kind: Pod
+metadata:
+ name: weblearner
+ labels:
+  app: weblearner
+  type: rest_service
+spec:
+ containers:
+  - name: weblearner
+    image: raghuram04/weblearnerrepo
+			  </pre>
+
+				<h4>Service Definition</h4>
+
+				<pre class="brush: java; addmargin" style="background-color: white">
+apiVersion: v1
+kind: Service
+metadata:
+ name: weblearner-service
+spec:
+ type: NodePort
+ ports:
+  - targetPort: 8085
+    nodePort: 30018
+    port: 8085
+ selector:
+  app: weblearner
+  type: rest_service
+
+			  </pre>
+			</div>
+
+			<img src="img/minikubedeployment.PNG" class="output">
+
+
+		</div>
+
+		<!-- Topic 4 end -->
+
+		<!--  Result Start -->
+		<h4>Result</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				Get the Minikube Node IP address by using <b>kubectl describe
+					pod {POD_NAME}</b> command. IP address will be given in the top as
+				"Node" parameter.
+			</div>
+		</div>
+		<h4>Get Request</h4>
+		<img src="img/minikuberesult.PNG" class="output"><br>
+
+
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				Source code for this demo is available in github for download <a
+					target="_blank"
+					href="https://github.com/Raghuram04/minikube_springboot_restfulwebservice.git">
+					Click here for download</a>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<!-- Result End -->
+
+	<!-- Footer Start -->
+	<div id="author"></div>
+	<br>
+	<div id="footer"></div>
+
+	<!-- Footer End -->
+
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+
+
+</body>
+</html>
+
+

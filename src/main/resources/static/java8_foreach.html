@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebLearner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+body {
+	background-color: #ebebe0;
+}
+
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+
+	<div class="container addmargin">
+
+		<!-- Topic Heading Start -->
+
+		<h2>Java8 - Features - forEach() - Iterating in java8</h2>
+
+		<!-- Topic Heading end -->
+
+		<!-- Overview Start -->
+		<div class="row addmargin overview"></div>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				In this tutorial, we are going to see the <b>forEach()</b> method
+				which is introduced in Java 8 for iterating Collection. We will
+				compare with traditional method and see where to use forEach()
+			</div>
+		</div>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				We can iterate any class which implements <b>Consumer</b> Interface
+				using forEach() . Consumer Interface is a <b>Functional
+					Interface</b> which has one abstract method called <b>accept(T t)</b>
+				which returns no result
+
+				<pre class="brush: java; addmargin">
+@FunctionalInterface
+public interface Consumer {
+    void accept(T t);
+}
+</pre>
+			</div>
+		</div>
+
+		<h4>Traditional Way of Iterating</h4>
+
+		<div class="row addmargin overview">
+
+			<div class="col">
+				Before Java8, we can iterate a Collection using for <b>Enhanced
+					for-loop</b>
+
+				<pre class="brush: java; addmargin">				
+	List<String> lstObject = new ArrayList<>();
+	lstObject.add("SAM");
+	lstObject.add("TOM");
+	lstObject.add("BOB");
+ 		
+        for (String val : lstObject) {
+			System.out.println("List Value ->" + val);
+		}				
+				
+				
+				
+				</pre>
+			</div>
+		</div>
+
+		<h4>Example for forEach() with Map and List</h4>
+		<div class="row addmargin overview">
+
+			<div class="col">
+				The below example shows the way to iterate <b>Map and List</b> using
+				forEach(). You can see, we have implemented the System.out.println()
+				using <b>Lamda </b> to print all the elements in the List and Map
+				<pre class="brush: java; addmargin">				
+	public static void main(String[] args) {
+		Map<String , String> mapObject = new HashMap<>();
+		mapObject.put("A", "SAM");
+		mapObject.put("B", "TOM");
+		mapObject.put("C", "BOB");
+
+		List<String> lstObject = new ArrayList<>();
+		lstObject.add("SAM");
+		lstObject.add("TOM");
+		lstObject.add("BOB");
+
+       // Iterate Map using forEach()
+       
+		mapObject.forEach((key, value) -> {
+			System.out.println("Key ->" + key + "  ---  " + "Value ->" + value);
+		});
+	
+		// Java foreach for List
+
+		lstObject.forEach(val -> System.out.println("List Value ->" + val));
+
+	}
+				
+				</pre>
+			</div>
+		</div>
+
+		<h4>Result</h4>
+
+
+
+		<!-- Overview End -->
+		<div class="row addmargin">
+
+			<div class="col">
+				<pre class="brush: java; addmargin">				
+Java8 forEach() to iterate Map
+Key ->A  ---  Value ->SAM
+Key ->B  ---  Value ->TOM
+Key ->C  ---  Value ->BOB
+Java8 forEach() to iterate List
+List Value ->SAM
+List Value ->TOM
+List Value ->BOB</pre>
+				The main advantage of using forEach() in Java 8 is we can use along
+				with Stream which support parallel processing . Also it is more
+				readable with less lines of code since we can use Lambda.
+			</div>
+		</div>
+
+
+
+		<!-- Result End -->
+
+		<!-- Footer Start -->
+		<h4>Related Links</h4>
+		<div class="row addmargin">
+			<div col="">
+				<ul>
+					<li><a
+						href="http://localhost:8081/java8_defaultinterface.html"
+						target="_blank">Java8 - Default Method in Interface</a></li>
+					<li><a
+						href="http://localhost:8081/java8_functioninterface.html"
+						target="_blank">Java8 - Function Interface and Lambda</a></li>
+					<li><a href="http://localhost:8081/java8_stream.html"
+						target="_blank">Java8 - Streams</a></li>
+					<li><a href="http://localhost:8081/java8_timeapi.html"
+						target="_blank">Java8 - Time API</a></li>
+				</ul>
+
+			</div>
+		</div>
+
+		<div id="author"></div>
+		<br> <br>
+		<div id="footer"></div>
+
+
+
+
+		<!-- Footer End -->
+
+		<script type="text/javascript">
+			SyntaxHighlighter.all();
+		</script>
+</body>
+</html>
+
+
