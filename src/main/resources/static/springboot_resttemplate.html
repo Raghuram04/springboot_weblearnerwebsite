@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebLearner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+body {
+	background-color: #ebebe0;
+}
+</style>
+</head>
+
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+
+	<div class="container addmargin">
+
+		<!-- Topic Heading Start -->
+
+		<h2>Spring RestTemplate - CRUD</h2>
+
+		<!-- Topic Heading end -->
+
+		<!-- Overview Start -->
+		<div class="row addmargin overview"></div>
+		<h4>Overview</h4>
+		<div class="row addmargin overview">
+			<div class="col">
+				RestTemplate class in spring offers methods to invoke restful
+				service.This uses underlying JDK <b>HttpURLConnection</b> class to
+				make http request.It creates a new thread for each http request.
+			</div>
+		</div>
+
+		<!-- Overview End -->
+
+		<!-- Demo Start -->
+		<h4>About Demo</h4>
+
+		<div class="row addmargin demodetails">
+
+			<div class="col">
+				In this Demo,we are going to see RestTemplate class used to invoke 4
+				different HTTP method GET/POST/PUT/DELETE. We have already developed
+				a <a target="_blank"
+					href="http://localhost:8081/springboot_restfulwebservice.html">CRUD
+					restful web service</a> which will be invoked here.
+			</div>
+		</div>
+
+		<!-- Demo end -->
+
+		<!-- Prerequisites Start -->
+
+		<h4>Prerequisites</h4>
+
+		<div class="row addmargin prerequisites">
+
+			<div class="col">
+				<ul>
+					<li>Maven 3.3.9</li>
+					<li>Java 8</li>
+					<li>Eclipse</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Prerequisites Stop -->
+
+		<!-- pom start -->
+
+		<h4>pom.xml</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				Link to source code is available at the bottom of the page for
+				download. We just need web starter dependency.
+				<textarea class="addmargin" cols="20" rows="6" wrap="hard" disabled
+					resize:none;>
+       <dependencies>		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+	</dependencies></textarea>
+			</div>
+		</div>
+
+		<!-- pom end -->
+
+		<h4>RestTemplateExample</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				We are using different methods available in RestTemplate to invoke
+				the web service.
+
+				<ul>
+					<li><b>getForEntity()</b> - This method makes a GET request to
+						the web service. We need to pass URL and return object type.</li>
+					<li><b>postForEntity()</b> - This method makes a POST request
+						to the web service. We need to pass URL, object to be posted and
+						return object type.</li>
+					<li><b>exchange()</b> - This method can be used for any HTTP
+						Methods.In this example we have used for PUT and Delete as we need
+						to pass query parameter. We have used <b>UriComponentsBuilder</b>
+						class to build the request URL and query parameter. This methods
+						takes UriComponentsBuilder object, HTTP methods name,
+						RequestEntity parameter if we need to pass header details and
+						expected return type object.</li>
+				</ul>
+
+				<pre class="brush: java; addmargin" style="background-color: white">
+				
+package com.weblearner.springboot.resttemplate;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.weblearner.springboot.model.Employee;
+
+public class RestTemplateExample {
+
+	public static void main(String args[]) {
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		// get method
+
+		Employee response = restTemplate.getForEntity("http://localhost:8080/weblearner/employee/A1234", Employee.class)
+				.getBody();
+		System.out.println("Name ->" + response.getEmpName());
+
+		// post
+
+		Employee newEmployee = new Employee("D1234", "Joseph", "IT");
+
+		String postResponse = restTemplate
+				.postForEntity("http://localhost:8080/weblearner/employee", newEmployee, String.class).getBody();
+		System.out.println("postResponse ->" + postResponse);
+
+		// put
+
+		UriComponentsBuilder builder = UriComponentsBuilder
+				.fromHttpUrl("http://localhost:8080/weblearner/employee/D1234").queryParam("deptName", "Finance");
+
+		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+		String putResponse = restTemplate.exchange(builder.toUriString(), HttpMethod.PUT, null, String.class).getBody();
+		
+		System.out.println("putResponse ->" + putResponse);
+
+		// delete
+
+		UriComponentsBuilder builderNew = UriComponentsBuilder
+				.fromHttpUrl("http://localhost:8080/weblearner/employee/D1234");
+
+		String deleteResponse = restTemplate.exchange(builderNew.toUriString(), HttpMethod.DELETE, null, String.class)
+				.getBody();
+
+		System.out.println("deleteResponse ->" + deleteResponse);
+
+	}
+
+}
+
+				 
+</pre>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- Topic 4 end -->
+
+		<!--  Result Start -->
+		<h4>Result:</h4>
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				<pre class="brush: java; addmargin" style="background-color: white">
+				
+22:51:59.822 [main] DEBUG org.springframework.web.client.RestTemplate - HTTP GET http://localhost:8080/weblearner/employee/A1234
+22:51:59.941 [main] DEBUG org.springframework.web.client.RestTemplate - Accept=[application/json, application/*+json]
+22:52:00.197 [main] DEBUG org.springframework.web.client.RestTemplate - Response 200 OK
+22:52:00.212 [main] DEBUG org.springframework.web.client.RestTemplate - Reading to [com.weblearner.springboot.model.Employee]
+Name ->Sam
+22:52:00.244 [main] DEBUG org.springframework.web.client.RestTemplate - HTTP POST http://localhost:8080/weblearner/employee
+22:52:00.244 [main] DEBUG org.springframework.web.client.RestTemplate - Accept=[text/plain, application/json, application/*+json, */*]
+22:52:00.306 [main] DEBUG org.springframework.web.client.RestTemplate - Writing [Employee Id: D1234Employee Name: JosephEmployee Dept Name: IT] with org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+22:52:00.404 [main] DEBUG org.springframework.web.client.RestTemplate - Response 200 OK
+22:52:00.404 [main] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as "text/plain;charset=UTF-8"
+postResponse ->Success
+22:52:00.404 [main] DEBUG org.springframework.web.client.RestTemplate - HTTP PUT http://localhost:8080/weblearner/employee/D1234?deptName=Finance
+22:52:00.404 [main] DEBUG org.springframework.web.client.RestTemplate - Accept=[text/plain, application/json, application/*+json, */*]
+22:52:00.419 [main] DEBUG org.springframework.web.client.RestTemplate - Response 200 OK
+22:52:00.419 [main] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as "text/plain;charset=UTF-8"
+putResponse ->SUCCESS
+22:52:00.419 [main] DEBUG org.springframework.web.client.RestTemplate - HTTP DELETE http://localhost:8080/weblearner/employee/D1234
+22:52:00.419 [main] DEBUG org.springframework.web.client.RestTemplate - Accept=[text/plain, application/json, application/*+json, */*]
+22:52:00.419 [main] DEBUG org.springframework.web.client.RestTemplate - Response 200 OK
+22:52:00.419 [main] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as "text/plain;charset=UTF-8"
+deleteResponse ->SUCCESS
+				</pre>
+			</div>
+		</div>
+		<!-- Result End -->
+
+		<div class="row addmargin stepbystep">
+			<div class="col">
+				Source code for this demo is available in github for download in <a
+					target="_blank"
+					href="https://github.com/Raghuram04/springboot_resttemplate.git">
+					Click here for download</a>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Footer Start -->
+	<div id="author"></div>
+	<br>
+	<div id="footer"></div>
+
+	<!-- Footer End -->
+
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>
+
+
