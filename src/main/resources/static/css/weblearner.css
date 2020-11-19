@@ -1,3 +1,15 @@
+div {
+	font-family: "Times New Roman", Times, serif;
+}
+
+#sidebar {
+	border: 1px solid black;
+}
+
+.col {
+	font-size: 18px;
+}
+
 textarea {
 	background-color: white;
 }
@@ -25,7 +37,7 @@ pre {
 }
 
 textarea {
-	width: 100%;
+	width: 100%;	
 }
 
 #siteheader {

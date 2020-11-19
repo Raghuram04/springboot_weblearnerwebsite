@@ -53,7 +53,7 @@ body {
 
 				<!-- Topic Heading Start -->
 
-				<h2>Spring Boot - Using Profile in Restful Service</h2>
+				<h2>Springboot - Restful Webservice - MongoDB</h2>
 
 				<!-- Topic Heading end -->
 
@@ -61,13 +61,33 @@ body {
 				<div class="row addmargin overview"></div>
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
-
 					<div class="col">
-						Spring Boot provides the option to load different files,classes
-						based on the environment/profiles. We will use <b>@Profile</b>
-						annotation to load different class. Mostly we will have different
-						database in each environment (DEV/TEST/PROD). We will show how to
-						load different class based on the profile.
+						MongoDB is a NOSQL Database which is very popular in the market
+						now. It stores the <b>Document</b> in <b>Collection</b>. Document
+						is a set of key-value pair. It can have any schema. Each document
+						can be different but can be placed in same Collection. Below are
+						some comparison between relational DB and Mongo DB terminology.<br>
+						<br>
+
+						<table class="table">
+							<thead>
+								<th>Relational DB</th>
+								<th>Mongo DB</th>
+							</thead>
+							<tr>
+								<td>Table</td>
+								<td>Collection</td>
+							</tr>
+							<tr>
+								<td>Row</td>
+								<td>Document</td>
+							</tr>
+							<tr>
+								<td>Column</td>
+								<td>Fields</td>
+							</tr>
+
+						</table>
 					</div>
 				</div>
 
@@ -78,9 +98,9 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, We have created a restful
-						service with environment properties and DB name selected based on
-						the profile</div>
+					<div class="col">In this demo,we are going to create a
+						restful web service using spring boot and connect with MongoDB to
+						store and retrieve value.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -96,6 +116,9 @@ body {
 							<li>Maven 3.3.9</li>
 							<li>Java 8</li>
 							<li>Eclipse</li>
+							<li>Mongo DB - <a
+								href="https://docs.mongodb.com/manual/installation/"
+								target="_blank">Installation Link</a></li>
 						</ul>
 					</div>
 				</div>
@@ -107,145 +130,178 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring Restful
-						application using Spring Boot . Link to source code is available
-						at the bottom of the page
-						<textarea class="addmargin" cols="100" rows="10" wrap="hard"
+						Link to source code is available at the bottom of the page for
+						download.
+						<textarea class="addmargin" cols="20" rows="10" wrap="hard"
 							disabled style="overflow: auto; resize: none">
-       <dependencies>
+      <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-	</dependencies>
-					</textarea>
+		</dependency>	
+		</textarea>
 					</div>
 				</div>
 
 				<!-- pom end -->
 
-				<h4>RestController</h4>
+				<h4>Controller</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are creating a simple Restful Service. We will invoke the
-						service to see the environment variable and class loaded based on
-						profile used to start the application. <b>@Value</b> annotation
-						used to get the value from properties file.
+						We have created a simple restful webservice to GET,POST and DELETE
+						record in MongoDB.For more details about restful service, please
+						check this link <a
+							href="http://localhost:8081/springboot_restfulwebservice.html"
+							target="_blank">Restful Service Details</a>.
+						</ul>
+
 						<pre class="brush: java; addmargin"
 							style="background-color: white">
 				
-@RestController
-public class RestfulWebService {
+package com.weblearner.springboot;
 
-	@Value("${env.message}")
-	private String env;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.weblearner.springboot.model.Student;
+import com.weblearner.springboot.repository.StudentRepository;
+
+@RestController
+@RequestMapping("/student")
+public class StudentController {
 
 	@Autowired
-	private DBConfig dbConfig;
+	private StudentRepository repo;
 
-	@RequestMapping("profile")
-	public String profile() {
-		return "Env Message ---> " + env;
+	@RequestMapping("/{name}")
+	public Student getStudent(@PathVariable("name") String name) {
+		System.out.println("Name"+name);
+		return repo.findByName(name);
 	}
-
-	@RequestMapping("beanprofile")
-	public String beanProfile() {
-		return dbConfig.dbName();
+	
+	
+	@PostMapping
+	public Student newStudent(@RequestBody Student student) {
+		System.out.println("Student Object"+student);
+		return repo.save(student);
+	}
+	
+	@DeleteMapping("/{name}")
+	public void deleteStudent(@PathVariable("name") String name) {
+		repo.deleteByName(name);
 	}
 
 }
+
 				 
 </pre>
 					</div>
 				</div>
 
 
-				<h4>Custom Class For Profile</h4>
+				<h4>Repository</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<b>DevDBConfig</b> class is annotated with <b>@Profile</b>
-						annotation.we have specified the values as "dev". so this class
-						will be loaded when we use "dev" profile. Similarly we have
-						created ProdDBConfig with "prod" profile.
+						We are going to use Spring Repository class called <b>MongoRepository</b>.
+						This class provide basic methods to perform CRUD operations. Also
+						we can add custom methods to extract data from MongoDB. In the
+						below class, we will get the Student details by name and delete a
+						student document using name.
+						</ul>
+
 						<pre class="brush: java; addmargin"
 							style="background-color: white">
-				
-@Component
-@Profile("dev")
-public class DevDBConfig implements DBConfig{
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+import com.weblearner.springboot.model.Student;
 
-	@Override
-	public String dbName() {		
-		return "Dev_DB_Name";
-	}
+@Repository
+public interface StudentRepository extends MongoRepository<Student
+								, String> {
+
+	public Student findByName(String name);	
+	public void deleteByName(String name);
 
 }
-				 
-</pre>
-					</div>
-				</div>
-
-
-				<h4>application.properties</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						we have created multiple application.properties for each
-						profile(dev,test,prod).
-
-						<h6>application.properties(default)</h6>
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard"
-							disabled style="overflow: auto; resize: none">
 				
-env.message=Dev environment
-spring.profiles.active=prod
-	
-</textarea>
-					</div>
-				</div>
-
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<h6>application.properties(Test)</h6>
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard"
-							disabled style="overflow: auto; resize: none">
 				
-env.message=Test environment
-
-	
-</textarea>
+						
+						</pre>
 					</div>
 				</div>
 
+				<h4>Model</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<h6>application.properties(Prod)</h6>
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard"
-							disabled style="overflow: auto; resize: none">
-				
-env.message=Prod environment
-
-	
-</textarea>
-					</div>
-				</div>
-
-
-				<h4>SpringBootApplication</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						This class is used to start the Spring boot application.
+						We have created a Student Class to get student details which will
+						be used as a model class.
+						</ul>
 
 						<pre class="brush: java; addmargin"
-							style="background-color: white"> 
-@SpringBootApplication
-public class SpringbootProfilesApplication {
+							style="background-color: white">
+package com.weblearner.springboot.model;
+
+public class Student {
 	
-	
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootProfilesApplication.class, args);
-		
+	private String name;
+
+	private String dept;
+
+	private int age;
+
+	public Student() {
+
 	}
- </pre>
+
+	public Student(String name, String dept, int age) {
+		this.name = name;
+		this.age = age;
+		this.dept = dept;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+}</pre>
+					</div>
+				</div>
+
+
+				<h4>DB Configuration</h4>
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						We can provide the DB configuration details in the
+						application.properties file. This file contains information like
+						name of the database,host,port details. We can also pass
+						authentication details.
+						</ul>
+
+						<pre class="brush: java; addmargin"
+							style="background-color: white">
+spring.data.mongodb.database=weblearner
+spring.data.mongodb.host=localhost
+spring.data.mongodb.port=27017
+spring.data.mongodb.repositories.enabled=true
+logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
+
+</pre>
 					</div>
 				</div>
 
@@ -254,45 +310,27 @@ public class SpringbootProfilesApplication {
 				<!--  Result Start -->
 				<h4>Result:</h4>
 				<div class="row addmargin stepbystep">
-					<div class="col">
-						Start the application passing profile value. Use the below
-						commands. We used "prod". <br> <b>java -jar
-							springboot-0.0.1-SNAPSHOT.jar --spring.profiles.active={{PROFILE
-							NAME}} </b>
-						<ul>
-							<li>http://localhost:8080/beanprofile</li>
-							<li>http://localhost:8080/profile</li>
-
-						</ul>
-
-
-
-					</div>
+					<div class="col">Involve the below URL to validate the
+						application.</div>
 				</div>
-
-				<h4>Start Up Log</h4>
+				<h4>Get Call</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_profile.PNG" class="output">
+						<img src="img/get_mongo.PNG" class="output">
 					</div>
 				</div>
-				<h4>Environment Variable from properties file</h4>
+				<h4>Post Call</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_profile_1.PNG" class="output"><br>
+						<img src="img/post_mongo.PNG" class="output">
 					</div>
 				</div>
-				<h4>Bean Class based on profile</h4>
+				<h4>Mongo DB</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_profile_2.PNG" class="output"><br>
+						<img src="img/mongo_screenshot.PNG" class="output">
 					</div>
 				</div>
-
-
-
-
-
 
 				<!-- Result End -->
 
@@ -300,11 +338,10 @@ public class SpringbootProfilesApplication {
 					<div class="col">
 						Source code for this demo is available in github for download in <a
 							target="_blank"
-							href="https://github.com/Raghuram04/springboot_profiles.git">
+							href="https://github.com/Raghuram04/springboot_mongo.git">
 							Click here for download</a>
 					</div>
 				</div>
-
 
 				<div class="row addmargin stepbystep">
 					<div class="col d-block d-sm-none">
@@ -316,7 +353,8 @@ public class SpringbootProfilesApplication {
 							<li><a
 								href="http://localhost:8081/springboot_lazyinitialization.html"
 								target="_blank">Spring Boot Lazy Loading</a></li>
-
+							<li><a href="http://localhost:8081/springboot_profile.html"
+								target="_blank">Spring Boot Profile</a></li>
 							<li><a href="http://localhost:8081/springboot_actuator.html"
 								target="_blank">Spring Boot Actuator</a></li>
 							<li><a href="http://localhost:8081/springboot_mvc.html"
@@ -327,8 +365,6 @@ public class SpringbootProfilesApplication {
 							<li><a
 								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
 							<li><a
 								href="http://localhost:8081/springboot_resttemplate.html"
 								target="_blank">Spring RestTemplate</a></li>
@@ -338,8 +374,10 @@ public class SpringbootProfilesApplication {
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
+
 
 	<!-- Footer Start -->
 	<div id="author"></div>
