@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -62,11 +58,10 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">On a Spring Based application, Sometimes we
-						dont want classes to be loaded on start up. We need them to be
-						loaded after first call made to the specific class. Spring help us
-						to achieve this feature by using Lazy Initialization . By default
-						Spring will load all the classes during start up.</div>
+					<div class="col">On a Spring Based application, Sometimes we dont want classes to be
+						loaded on start up. We need them to be loaded after first call made to the specific class.
+						Spring help us to achieve this feature by using Lazy Initialization . By default Spring will
+						load all the classes during start up.</div>
 				</div>
 
 				<!-- Overview End -->
@@ -77,12 +72,11 @@ body {
 				<div class="row addmargin demodetails">
 
 					<div class="col">
-						In this Demo, we will show the Implementation of Lazy
-						Initialization in Spring Boot Restful Web Service.We will show how
-						lazy load the entire project as well as specific class. <b>@Lazy</b>
+						In this Demo, we will show the Implementation of Lazy Initialization in Spring Boot Restful
+						Web Service.We will show how lazy load the entire project as well as specific class. <b>@Lazy</b>
 						annotation is used for Lazy Initialization of specific class and <b>lazy-initialization=true</b>
-						in application.properties is used when we need to implement Lazy
-						Initialization throughout the project.
+						in application.properties is used when we need to implement Lazy Initialization throughout the
+						project.
 					</div>
 				</div>
 
@@ -110,11 +104,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring MVC
-						application using Spring Boot . Link to source code is available
-						at the bottom of the page
-						<textarea class="addmargin" cols="100" rows="15" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Below dependencies are enough to develop the Spring MVC application using Spring Boot . Link
+						to source code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="15" wrap="hard" disabled
+							style="overflow: auto; resize: none">
        <dependencies>
 		<dependency>
 			<groupId>org.Springframework.boot</groupId>
@@ -141,12 +134,9 @@ body {
 				<h4>Service</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have created a class with simple method returning String. We
-						have a constructor to track the Initialization of this class. Used
-						<b>@Lazy</b> annotation to mark this class as Lazy Initialization
-						class
-
-						<pre class="brush: java; addmargin">
+						We have created a class with simple method returning String. We have a constructor to track
+						the Initialization of this class. Used <b>@Lazy</b> annotation to mark this class as Lazy
+						Initialization class <pre class="brush: java; addmargin">
 				
 @Lazy   
 @Component
@@ -167,13 +157,9 @@ public class LazyInitializationClass {
 				<h4>RestController</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Restful Service invoking the service class. Make sure to use <b>@Lazy</b>
-						in LazyInitializationClass dependency injection class in
-						LazyController too.
-
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
-				
+						Restful Service invoking the service class. Make sure to use <b>@Lazy</b> in
+						LazyInitializationClass dependency injection class in LazyController too. <pre
+							class="brush: java; addmargin">				
 @RestController
 @EnableAutoConfiguration
 public class LazyController {
@@ -200,23 +186,17 @@ public class LazyController {
 				<h4>application.properties</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below parameter helps us to achieve Lazy Loading concept in Spring
-						boot applications. Use this config only if we need to implement
-						Lazy Loading throughout the project.
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
-      Spring.main.lazy-initialization=true
-   
+						Below parameter helps us to achieve Lazy Loading concept in Spring boot applications. Use this
+						config only if we need to implement Lazy Loading throughout the project. <pre
+							class="brush: java; addmargin">
+      Spring.main.lazy-initialization=true   
 					</pre>
 					</div>
 				</div>
 				<h4>SpringBootApplication</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						This class is used to start the Spring boot application.
-
-						<pre class="brush: java; addmargin"
-							style="background-color: white"> 
+						This class is used to start the Spring boot application. <pre class="brush: java; addmargin">
 @SpringBootApplication
 public class SpringbootLazyinitializationApplication {	
 
@@ -236,11 +216,9 @@ public class SpringbootLazyinitializationApplication {
 				<h4>Result:</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Hit this URL http://localhost:8080/greeting in browser and verify
-						the logs <br> <br>
+						Hit this URL http://localhost:8080/greeting in browser and verify the logs <br> <br>
 						<h6>With Lazy Loading enabled for entire project</h6>
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 2020-09-11 09:30:23.755  INFO 1092 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2020-09-11 09:30:23.755  INFO 1092 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4641 ms
 2020-09-11 09:30:24.317  INFO 1092 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
@@ -253,12 +231,9 @@ LazyController is Initialized
 LazyInitializationClass Object Created
 Hello
 
-   
-					</pre>
+</pre>
 						<h6>Without Lazy Loading enabled</h6>
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
-					
+						<pre class="brush: java; addmargin">					
 2020-09-11 09:35:20.529  INFO 9092 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2020-09-11 09:35:20.530  INFO 9092 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1762 ms
 LazyController is Initialized
@@ -269,8 +244,7 @@ LazyInitializationClass Object Created
 					
 				</pre>
 						<h6>Lazy Loading enabled for specific class</h6>
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 2020-09-11 09:51:26.062  INFO 4328 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2020-09-11 09:51:26.063  INFO 4328 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1754 ms
 LazyController is Initialized
@@ -288,29 +262,27 @@ Hello
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profiles</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profiles</a></li>
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
 
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>
@@ -318,10 +290,9 @@ Hello
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_lazyinitialization.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_lazyinitialization.git"> Click here for
+							download</a>
 					</div>
 				</div>
 

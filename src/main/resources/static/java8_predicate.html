@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebLearner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+		$("#java8_sidebar").load("java8_sidebar.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+body {
+	background-color: #ebebe0;
+}
+
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+	<div class="container-fluid addmargin">
+		<div class="row">
+			<div class="col-2 d-none d-md-block">
+				<div id="java8_sidebar"></div>
+			</div>
+			<div class="col-10">
+				<!-- Topic Heading Start -->
+				<h2>Java8 Features - Predicate Functional Interface</h2>
+				<!-- Topic Heading end -->
+				<!-- Overview Start -->
+				<div class="row addmargin overview"></div>
+				<div class="row addmargin overview">
+					<div class="col">
+						In this tutorial, We are going to learn about <b>Predicate Functional Interface</b> which was
+						introduced as part of Java 8. As learned in previous tutorial about <a
+							href="java8_functioninterface.html">Functional Interface</a>, we have only one abstract
+						method in Predicate Function Interface called <b>test()</b>.As name says ,this function
+						evaluate an operation to return boolean result.
+					</div>
+				</div>
+				<h4>Methods in Predicate</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>MethodName</th>
+									<th>type</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tr>
+								<td>test(T t)</td>
+								<td>abstract</td>
+								<td>Evaluate the predicate and return boolean value</td>
+							</tr>
+							<tr>
+								<td>and(Predicate &lt; ? super T &gt; otherPredicate)</td>
+								<td>default</td>
+								<td>Chain multiple predicate function and apply LOGICAL AND condition. Check both
+									predicate function return true.</td>
+							</tr>
+							<tr>
+								<td>or(Predicate &lt; ? super T &gt; otherPredicate)</td>
+								<td>default</td>
+								<td>Chain multiple predicate function and apply LOGICAL OR condition. Check at least
+									one predicate function return true.</td>
+							</tr>
+							<tr>
+								<td>negate()</td>
+								<td>default</td>
+								<td>Negate the actual response evaluate by predicate.</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<h4>Example and explanation</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						<ul>
+							<li><h4>test(T t)</h4></li>
+						</ul>
+						T is the input given to the predicate function. In below example , we are checking whether
+						given string length is greater than 0. Only abstract method which take T type input, in our
+						case its a string. We have a return a lambda function to override the test method. <pre
+							class="brush: java; addmargin">
+Predicate<String> passwordCheck = pass -> pass.length() > 0;
+passwordCheck.test("Weblearner");	
+						
+</pre>
+					</div>
+				</div>
+				<div class="row addmargin overview">
+					<div class="col">
+						<ul>
+							<li><h4>and(Predicate &lt; ? super T &gt; otherPredicate)</h4></li>
+						</ul>
+						This method takes another predicate as input and evaluate both the predicate and check whether
+						both returns true. we need to call test() to pass input to this function. This is a default
+						method in Predicate Interface,so we are not breaking the rule of Function Interface(one
+						abstract method) <pre class="brush: java; addmargin">
+Predicate<String> passwordCheck = pass -> pass.length() > 0;
+Predicate<String> maxLength = pass -> pass.length() > 10;
+maxLength.and(passwordCheck).test("Weblearner10");
+
+</pre>
+					</div>
+				</div>
+				<div class="row addmargin overview">
+					<div class="col">
+						<ul>
+							<li><h4>or(Predicate &lt; ? super T &gt; otherPredicate)</h4></li>
+						</ul>
+						This method takes another predicate as input and evaluate either one of the predicate returns
+						true. we need to call test() to pass input to this function. <pre
+							class="brush: java; addmargin">
+Predicate<String> passwordCheck = pass -> pass.length() > 0;
+Predicate<String> maxLength = pass -> pass.length() > 10;
+maxLength.or(passwordCheck).test("Weblearn");
+
+</pre>
+					</div>
+				</div>
+				<div class="row addmargin overview">
+					<div class="col">
+						<ul>
+							<li><h4>negate()</h4></li>
+						</ul>
+						This method negate the value returned by the test(). <pre class="brush: java; addmargin">
+Predicate<String> passwordCheck = pass -> pass.length() > 0;
+Predicate<String> maxLength = pass -> pass.length() > 10;
+maxLength.or(passwordCheck).negate().test("Weblearner");
+
+</pre>
+					</div>
+				</div>
+				<div class="row addmargin overview">
+					<div class="col">
+						<h4>Complete Code For Predicate</h4>
+						<pre class="brush: java; addmargin">	
+package com.weblearner.functionallambda;
+
+import java.util.function.Predicate;
+
+public class PredicateFunctionInterface {
+
+	public static void main(String[] args) {
+
+		System.out.println("Test Condition");
+
+		Predicate<String> passwordCheck = pass -> pass.length() > 0;
+
+		System.out.println("Not Empty Check -->" + passwordCheck.test("Weblearner"));
+		System.out.println("Not Empty Check -->" + passwordCheck.test(""));
+
+		System.out.println("And Condition");
+
+		Predicate<String> maxLength = pass -> pass.length() > 10;
+
+		System.out.println("Empty and Max length Check -->" + maxLength.and(passwordCheck).test("Weblearner10"));
+		System.out.println("Empty and Max length Check -->" + maxLength.and(passwordCheck).test("Weblearner"));
+
+		System.out.println("OR Condition");
+
+		System.out.println("OR Check -->" + maxLength.or(passwordCheck).test("Weblearner"));
+
+		System.out.println("Negate Condition");
+
+		System.out.println("Negate Check -->" + maxLength.or(passwordCheck).negate().test("Weblearner"));
+
+		String response = passingPredicate(10, i -> i > 18);
+
+		System.out.println("Passing Predicate as parameter  -->" + response);
+
+	}
+
+	private static String passingPredicate(int a, Predicate<Integer> ageLimitCheck) {
+
+		if (ageLimitCheck.test(a)) {
+			return "Age limit Check Passed";
+		} else {
+			return "Age limit Check Failed";
+		}
+
+	}
+
+}
+</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row addmargin">
+		<div class="col  d-block d-sm-none">
+			<h4>Related Links</h4>
+			<ul>
+				<li><a href="http://localhost:8081/java8_foreach.html" target="_blank">Java8 - forEach
+						Iterator</a></li>
+				<li><a href="http://localhost:8081/java8_functioninterface.html" target="_blank">Java8
+						- Function Interface and Lambda</a></li>
+				<li><a href="http://localhost:8081/java8_predicate.html" target="_blank">Java8 -
+						Predicate Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_consumer.html" target="_blank">Java8 -
+						Consumer Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_supplier.html" target="_blank">Java8 -
+						Supplier Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_function.html" target="_blank">Java8 -
+						Function Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_bipredicate.html" target="_blank">Java8 -
+						BiPredicate Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_biconsumer.html" target="_blank">Java8 -
+						BiConsumer Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_bifunction.html" target="_blank">Java8
+						- BiFunction Functional Interface</a></li>
+				<li><a href="http://localhost:8081/java8_stream.html" target="_blank">Java8 - Streams</a></li>
+				<li><a href="http://localhost:8081/java8_timeapi.html" target="_blank">Java8 - Time API</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="author"></div>
+	<br>
+	<br>
+	<div id="footer"></div>
+	<!-- Footer End -->
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>

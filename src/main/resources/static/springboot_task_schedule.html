@@ -49,7 +49,7 @@ body {
 
 				<!-- Topic Heading Start -->
 
-				<h2>Spring Boot - Using Profile in Restful Service</h2>
+				<h2>Spring Boot - Task Execution and Scheduling</h2>
 
 				<!-- Topic Heading end -->
 
@@ -59,10 +59,10 @@ body {
 				<div class="row addmargin overview">
 
 					<div class="col">
-						Spring Boot provides the option to load different files,classes based on the
-						environment/profiles. We will use <b>@Profile</b> annotation to load different class. Mostly
-						we will have different database in each environment (DEV/TEST/PROD). We will show how to load
-						different class based on the profile.
+						Spring provides feature to execute task asynchronously and schedule them based on needs.
+						Spring uses <b>TaskExecutor</b> and <b>TaskScheduler</b> interfaces to achieve this feature.
+						Spring also provides lot of implementation class for this interface and we can use them based
+						on the application need.
 					</div>
 				</div>
 
@@ -73,8 +73,12 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, We have created a restful service with environment
-						properties and DB name selected based on the profile</div>
+					<div class="col">
+						In this Demo, We are going to see <b>SimpleAsyncTaskExecutor</b> and <b>SyncTaskExecutor</b>.SimpleAsyncTaskExecutor
+						will generate new thread for each invocation.We can also set the concurrency
+						limit.SyncTaskExecutor will use the calling method thread only. Its is used in mostly in the
+						scenario where multithreading is not required.
+					</div>
 				</div>
 
 				<!-- Demo end -->
@@ -101,186 +105,133 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring Restful application using Spring Boot .
-						Link to source code is available at the bottom of the page
+						Below dependencies are enough to develop the Spring based task and scheduler . Link to source
+						code is available at the bottom of the page
 						<textarea class="addmargin" cols="100" rows="6" wrap="hard" disabled
 							style="overflow: auto; resize: none">
-       <dependencies>
-		<dependency>
+       	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-	</dependencies>
 					</textarea>
 					</div>
 				</div>
 
 				<!-- pom end -->
 
-				<h4>RestController</h4>
+				<h4>MyTaskScheduler</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are creating a simple Restful Service. We will invoke the service to see the environment
-						variable and class loaded based on profile used to start the application. <b>@Value</b>
-						annotation used to get the value from properties file. <pre class="brush: java; addmargin">
-				
-@RestController
-public class RestfulWebService {
+						In this class, we have used both SimpleAsyncTaskExecutor and SyncTaskExecutor to demonstrate
+						the task execution. Also we have used <b>@Scheduled</b> annotation on top of the methods to
+						schedule execution timing.<pre class="brush: java; addmargin">
+package com.weblearner.springboot;
 
-	@Value("${env.message}")
-	private String env;
+import java.time.LocalTime;
 
-	@Autowired
-	private DBConfig dbConfig;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.SyncTaskExecutor;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-	@RequestMapping("profile")
-	public String profile() {
-		return "Env Message ---> " + env;
-	}
-
-	@RequestMapping("beanprofile")
-	public String beanProfile() {
-		return dbConfig.dbName();
-	}
-
-}
-				 
-</pre>
-					</div>
-				</div>
-
-
-				<h4>Custom Class For Profile</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<b>DevDBConfig</b> class is annotated with <b>@Profile</b> annotation.we have specified the
-						values as "dev". so this class will be loaded when we use "dev" profile. Similarly we have
-						created ProdDBConfig with "prod" profile. <pre class="brush: java; addmargin">
-				
 @Component
-@Profile("dev")
-public class DevDBConfig implements DBConfig{
+public class MyTaskScheduler {
 
-	@Override
-	public String dbName() {		
-		return "Dev_DB_Name";
+	@Scheduled(fixedDelay = 10000)
+	public void checkTime() {
+		System.out.println("Current Time" + LocalTime.now());
+
+	}
+
+	@Scheduled(cron = "5 * * * * *")
+	public void asyncThread() {
+		SimpleAsyncTaskExecutor asyncTask = new SimpleAsyncTaskExecutor();
+		for (int i = 0; i < 10; i++) {
+			asyncTask.submit(() -> System.out.println("Thread name " + Thread.currentThread().getName()));
+		}
+
+	}
+
+	@Scheduled(cron = "10 * * * * *")
+	public void syncThread() {
+		SyncTaskExecutor syncTask = new SyncTaskExecutor();
+		for (int i = 0; i < 10; i++) {
+			syncTask.execute(() -> System.out.println("Thread name " + Thread.currentThread().getName()));
+		}
+
 	}
 
 }
-				 
+
 </pre>
 					</div>
 				</div>
 
 
-				<h4>application.properties</h4>
+
+				<h4>SpringbootTaskandscheduleApplication</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						we have created multiple application.properties for each profile(dev,test,prod).
+						Spring boot starter class which is used to start the application. <pre
+							class="brush: java; addmargin">
+package com.weblearner.springboot;
 
-						<h6>application.properties(default)</h6>
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
-							style="overflow: auto; resize: none">
-				
-env.message=Dev environment
-spring.profiles.active=prod
-	
-</textarea>
-					</div>
-				</div>
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<h6>application.properties(Test)</h6>
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
-							style="overflow: auto; resize: none">
-				
-env.message=Test environment
-
-	
-</textarea>
-					</div>
-				</div>
-
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<h6>application.properties(Prod)</h6>
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
-							style="overflow: auto; resize: none">
-				
-env.message=Prod environment
-
-	
-</textarea>
-					</div>
-				</div>
-
-
-				<h4>SpringBootApplication</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						This class is used to start the Spring boot application. <pre class="brush: java; addmargin"> 
 @SpringBootApplication
-public class SpringbootProfilesApplication {
-	
-	
+@EnableScheduling
+public class SpringbootTaskandscheduleApplication {
+
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootProfilesApplication.class, args);
-		
+		SpringApplication.run(SpringbootTaskandscheduleApplication.class, args);
 	}
- </pre>
+
+}
+
+</pre>
 					</div>
 				</div>
 
-				<!-- Topic 4 end -->
-
-				<!--  Result Start -->
-				<h4>Result:</h4>
+				<h4>Result</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Start the application passing profile value. Use the below commands. We used "prod". <br>
-						<b>java -jar springboot-0.0.1-SNAPSHOT.jar --spring.profiles.active={{PROFILE NAME}} </b>
-						<ul>
-							<li>http://localhost:8080/beanprofile</li>
-							<li>http://localhost:8080/profile</li>
-
-						</ul>
-
-
-
+						We can clear see, AsynTaskExecutor create new thread for each execution where as
+						SyncTaskExecutor uses the same thread of the method invocation. <pre
+							class="brush: java; addmargin">
+Current Time14:21:52.882
+Current Time14:22:02.884
+Thread name SimpleAsyncTaskExecutor-1
+Thread name SimpleAsyncTaskExecutor-2
+Thread name SimpleAsyncTaskExecutor-3
+Thread name SimpleAsyncTaskExecutor-4
+Thread name SimpleAsyncTaskExecutor-5
+Thread name SimpleAsyncTaskExecutor-6
+Thread name SimpleAsyncTaskExecutor-7
+Thread name SimpleAsyncTaskExecutor-9
+Thread name SimpleAsyncTaskExecutor-8
+Thread name SimpleAsyncTaskExecutor-10
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1
+Thread name scheduling-1			
+							</pre>
 					</div>
 				</div>
-
-				<h4>Start Up Log</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<img src="img/springboot_profile.PNG" class="output">
-					</div>
-				</div>
-				<h4>Environment Variable from properties file</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<img src="img/springboot_profile_1.PNG" class="output"><br>
-					</div>
-				</div>
-				<h4>Bean Class based on profile</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<img src="img/springboot_profile_2.PNG" class="output"><br>
-					</div>
-				</div>
-
-
-
-
-
 
 				<!-- Result End -->
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
 						Source code for this demo is available in github for download in <a target="_blank"
-							href="https://github.com/Raghuram04/springboot_profiles.git"> Click here for download</a>
+							href="https://github.com/Raghuram04/springboot_h2_database.git"> Click here for download</a>
 					</div>
 				</div>
 

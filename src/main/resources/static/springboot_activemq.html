@@ -49,7 +49,7 @@ body {
 
 				<!-- Topic Heading Start -->
 
-				<h2>Spring Boot - Actuator - Readiness Probe - Liveness Probe - Custom Probe Example</h2>
+				<h2>Spring Boot - ActiveMQ - Consumer and Publisher Example</h2>
 
 				<!-- Topic Heading end -->
 
@@ -59,10 +59,8 @@ body {
 				<div class="row addmargin overview">
 
 					<div class="col">
-						Docker infrastructure comes with Readiness and Liveness probe to determine the health of the
-						application before serving traffic and while processing transactions. Spring Boot provides
-						inbuilt support for this feature. We just need to include <b>spring-boot-starter-actuator</b>
-						library. It also support custom health check.
+						<b>ActiveMQ</b> is a open source , flexible multi-purpose messaging queue. Springboot provides
+						required library to connect to ActiveMQ with minimal configuration and coding.
 					</div>
 				</div>
 
@@ -73,9 +71,8 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, we will show the implementation of Spring Actuator and
-						Custom build actuator to check the application health. Which can be later confirmed in Docker
-						infrastructure to monitor the application health</div>
+					<div class="col">In this Demo, we will create a simple restful service to accept a object
+						and publish the object to queue. Later will be consume the same message from ActiveMQ.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -91,6 +88,8 @@ body {
 							<li>Maven 3.3.9</li>
 							<li>Java 8</li>
 							<li>Eclipse</li>
+							<li>ActiveMQ - <a href="http://activemq.apache.org/components/classic/download/"
+								target="_blank">Download Here</a></li>
 						</ul>
 					</div>
 				</div>
@@ -102,20 +101,18 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring MVC application using Spring Boot . Link
+						Below dependencies are required to develop a restful service and connect with ActiveMQ . Link
 						to source code is available at the bottom of the page
 						<textarea class="addmargin" cols="100" rows="10" wrap="hard" disabled
 							style="overflow: auto; resize: none">
-       <dependencies>
-		<dependency>
+      <dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-	</dependencies>
 					</textarea>
 					</div>
 				</div>
@@ -125,82 +122,134 @@ body {
 				<h4>RestController</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are creating a simple Restful Service. We will invoke the method in this service through
-						our custom health check class. This ensure our service health before serving traffic from end
-						user. <pre class="brush: java; addmargin">
-				
+						We are creating a simple restful service and publishing the request object to ActiveMQ. <b>JmsTemplate</b>
+						class provide by spring helps to publish the message to configured queue. We have named our
+						queue as "myweblearner". <pre class="brush: java; addmargin">
 @RestController
-public class ActuatorController {
-	
-	@RequestMapping("myService")
-	public String myService() {
-		return "Hello World";
-	}
-
-}
-				 
-</pre>
-					</div>
-				</div>
-
-
-				<h4>Custom Health Check</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<b>CustomHealthChecker</b> class implements <b>HealthIndicator</b> interface and overrides the
-						health method. we can implement our logic here to check the system health. In this demo, we
-						will invoke the controller method directly. <pre class="brush: java; addmargin">
-				
-@Component
-public class CustomHealthChecker implements HealthIndicator{
+@RequestMapping("/weblearner")
+public class QueueController {
 	
 	@Autowired
-	private ActuatorController controller;
+	private JmsTemplate template;
 
-	@Override
-	public Health health() {	
-		System.out.println("Custom method is invoked");
-		String resposne = controller.myService();
-		System.out.println("Health check response"+ resposne);
-		if(resposne.equalsIgnoreCase("Hello World")) {
-			return Health.up().withDetail("status", "Service Works fine  !!!").build();
-		}		
-		return Health.down().withDetail("status", "Not Fully Ready !!!").build();
+	@PostMapping("/employee")
+	public String newEmployee(@RequestBody Employee employee) {		
+		template.convertAndSend("myweblearner", employee);
+		return "Success";
 	}
-
 }
-				 
+			 
 </pre>
 					</div>
 				</div>
 
 
-				<h4>application.properties</h4>
+				<h4>Queue Configuration</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Most of the Spring Actuator Service are enabled by default except shutdown. If we prefer to
-						enable only few monitoring we can disable the auto actuator service using <b>management.endpoints.enabled-by-default=false</b>
-						and then we can enable selected feature alone management.endpoint.
-						<id>.enabled=true <textarea class="addmargin" cols="100" rows="15" wrap="hard" disabled
-							style="overflow: auto; resize: none;">
+						<b>ConsumerConfiguration</b> class is annotated with @Configuration and @EnableJms to tell
+						spring that its a JMS configuration class. We will use <b>ActiveMQConnectionFactory</b> to
+						connect to the ActiveMQ in local. Once we start ActiveMQ in local, it will be available to
+						access at port 61616. <pre class="brush: java; addmargin">
 				
-## management.endpoints.enabled-by-default=true   
-## disable all actuator endpoint and we need to enable the required feature alone . By default all are enabled expect shutdown
+@Configuration
+@EnableJms
+public class ConsumerConfiguration {
+
+  @Bean
+  public ActiveMQConnectionFactory activeMQConnectionFactory() {
+    ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
+    activeMQConnectionFactory.setBrokerURL("tcp://localhost:61616");
+    activeMQConnectionFactory.setTrustAllPackages(true);
+    return activeMQConnectionFactory;
+  }
+
+  @Bean
+  public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
+    DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+    factory.setConnectionFactory(activeMQConnectionFactory());
+    factory.setConcurrency("10");
+    return factory;
+  }
+  
+}
+
+				 
+</pre>
+					</div>
+				</div>
+
+				<h4>Queue Consumer</h4>
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						<b>QueueConsumer</b> class consume the message from queue and print the object. We use <b>JmsListener</b>
+						annotation and provide the destination queue name. <pre class="brush: java; addmargin">
+				
+@Component
+public class QueueConsumer {
+
+	@JmsListener(destination = "myweblearner")
+	public void consumer(Employee message) {
+		System.out.println("Consumed Message " + message.toString());
+
+	}
+
+}				 
+</pre>
+					</div>
+				</div>
 
 
-## http://localhost:8080/actuator/health/    
-## http://localhost:8080/actuator/health/customHealthChecker -- Custom response
-## http://localhost:8080/actuator/health/readinessStateProbeIndicator   -- Kubenetes Readiness
-## http://localhost:8080/actuator/health/livenessStateProbeIndicator    -- Kubenetes Liveness
 
+				<h4>Model Class</h4>
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						Simple model class called Employee which we will publish and consume from ActiveMQ. <pre
+							class="brush: java; addmargin">
+				
+@Component
+public class Employee implements Serializable {
 
-## display custom message with health info
+	private static final long serialVersionUID = 1L;
 
-management.endpoint.health.show-details: ALWAYS  
-management.health.probes.enabled=true
+	private String empId;
+
+	private String empName;
+
+	private String deptName;
+
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String toString() {
+		return "Employee Id: " + this.empId + "Employee Name: " + this.empName + "Employee Dept Name: " + this.deptName;
+	}
+
+}
 
 	
-</textarea>
+</pre>
 					</div>
 				</div>
 
@@ -210,10 +259,10 @@ management.health.probes.enabled=true
 					<div class="col">
 						This class is used to start the Spring boot application. <pre class="brush: java; addmargin">
 @SpringBootApplication
-public class ActuatorApplication {
+public class SpringbootActivemqApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ActuatorApplication.class, args);
+		SpringApplication.run(SpringbootActivemqApplication.class, args);
 	}
 
 }
@@ -227,45 +276,63 @@ public class ActuatorApplication {
 				<h4>Result:</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Hit the below endpoints in browser and see the response. <br>
+						Hit the below URL after starting ActiveMQ in your laptop.
 						<ul>
-							<li>http://localhost:8080/actuator/health/</li>
-							<li>http://localhost:8080/actuator/health/customHealthChecker -- Custom response</li>
-							<li>http://localhost:8080/actuator/health/readinessStateProbeIndicator -- Kubenetes
-								Readiness</li>
-							<li>http://localhost:8080/actuator/health/livenessStateProbeIndicator -- Kubenetes
-								Liveness</li>
+							<li>http://127.0.0.1:8161/admin/queues.jsp</li>
 						</ul>
-
-
-
 					</div>
 				</div>
-
-				<h4>Default health Check</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_actuator_1.PNG" class="output"><br>
+						<img src="img/activemq1.PNG" class="output"><br>
 					</div>
 				</div>
-				<h4>Custom Health Check</h4>
+
+
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_actuator_2.PNG" class="output"><br>
+						<h4>Post the Message to Queue</h4>
+					</div>
+				</div>
+				<div class="row addmargin stepbystep">
+					<div class="col">
+
+						<img src="img/activemq2.PNG" class="output"><br>
 					</div>
 				</div>
 
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						<h4>Check the Message in ActiveMQ</h4>
+					</div>
+				</div>
 
+				<div class="row addmargin stepbystep">
+					<div class="col">
 
+						 <img src="img/activemq3.PNG" class="output"><br>
+					</div>
+				</div>
 
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						<h4>Consumer Message from log</h4>
+					</div>
+				</div>
 
+				<div class="row addmargin stepbystep">
+					<div class="col">
 
-				<!-- Result End -->
+						 <img src="img/activemq4.PNG" class="output"><br>
+					</div>
+				</div>
+				
+					<!-- Result End -->
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
 						Source code for this demo is available in github for download in <a target="_blank"
-							href="https://github.com/Raghuram04/springboot_actuator.git"> Click here for download</a>
+							href="https://github.com/Raghuram04/springboot_activemq.git"> Click here for download</a>
 					</div>
 				</div>
 
@@ -292,7 +359,7 @@ public class ActuatorApplication {
 							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
 									Boot MVC Security</a></li>
 							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
-									Boot Custom Validation</a></li>					
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>

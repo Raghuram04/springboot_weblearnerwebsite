@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -54,8 +50,7 @@ body {
 
 				<!-- Topic Heading Start -->
 
-				<h2>Springboot Restful Service - MySQL/Relational Database
-					Example</h2>
+				<h2>Springboot Restful Service - MySQL/Relational Database Example</h2>
 
 				<!-- Topic Heading end -->
 
@@ -64,12 +59,10 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">Representation state transfer(REST) is a
-						architectural style defines the rules for developing web services.
-						Webresource are mapped with URI and desired format of output are
-						exposed. The response can confirm that some alteration has been
-						made to the resource state . Various Http methods are available
-						GET,PUT,POST,DELETE,TRACE,OPTIONS etc.</div>
+					<div class="col">Representation state transfer(REST) is a architectural style defines the
+						rules for developing web services. Webresource are mapped with URI and desired format of
+						output are exposed. The response can confirm that some alteration has been made to the
+						resource state . Various Http methods are available GET,PUT,POST,DELETE,TRACE,OPTIONS etc.</div>
 				</div>
 
 				<!-- Overview End -->
@@ -79,9 +72,8 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, we have developed a restful
-						webservice using Spring Boot which connect with MySQL Database and
-						Perform CRUD Operation.</div>
+					<div class="col">In this Demo, we have developed a restful webservice using Spring Boot
+						which connect with MySQL Database and Perform CRUD Operation.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -109,11 +101,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop a restful service using
-						Spring Boot . Link to source code is available at the bottom of
-						the page
-						<textarea class="addmargin" cols="100" rows="15" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Below dependencies are enough to develop a restful service using Spring Boot . Link to source
+						code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="15" wrap="hard" disabled
+							style="overflow: auto; resize: none">
      <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -137,10 +128,9 @@ body {
 				<h4>application.properties</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Include the below properties in application.properties file to
-						connect with mysql db.
-						<textarea class="addmargin" cols="100" rows="5" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Include the below properties in application.properties file to connect with mysql db.
+						<textarea class="addmargin" cols="100" rows="5" wrap="hard" disabled
+							style="overflow: auto; resize: none">
 spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=jdbc:mysql://localhost:3306/weblearner
 spring.datasource.username=root
@@ -154,9 +144,8 @@ spring.datasource.password=password
 				<h4>MySQL Database</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have created a table in MySQL database using below commands. We
-						will use this table to perform CRUD operation.
-						<pre class="brush: java; addmargin">
+						We have created a table in MySQL database using below commands. We will use this table to
+						perform CRUD operation. <pre class="brush: java; addmargin">
 create table weblearner(userid int,username varchar(100),email varchar(100),PRIMARY KEY ( userid ));
 insert into weblearner values(1,'User1','User1@myweblearner.com');
 </pre>
@@ -168,11 +157,9 @@ insert into weblearner values(1,'User1','User1@myweblearner.com');
 				<h4>RestController</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have create a simple restful controller which will expose
-						different URI to perform CRUD Operation. We have @Autowired <b>WeblearnerRepository</b>
-						class to perform DB operation.
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						We have create a simple restful controller which will expose different URI to perform CRUD
+						Operation. We have @Autowired <b>WeblearnerRepository</b> class to perform DB operation. <pre
+							class="brush: java; addmargin">
 @RestController
 @RequestMapping("/weblearner")
 public class UserController {
@@ -205,25 +192,16 @@ public class UserController {
 				<h4>WeblearnerRepository</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Interface WeblearnerRepository extends <b>CrudRepository</b>
-						provide by spring to support CRUD operation. Default <b>findById()/save()/deleteById()</b>
-						methods are exposed by CrudRepository. These methods can be
-						involved directly to perform respective operations.
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						Interface WeblearnerRepository extends <b>CrudRepository</b> provide by spring to support CRUD
+						operation. Default <b>findById()/save()/deleteById()</b> methods are exposed by
+						CrudRepository. These methods can be involved directly to perform respective operations. <pre
+							class="brush: java; addmargin">
 
 @Repository
-public interface WeblearnerRepository extends CrudRepository<Weblearner
-								, Integer>{
+public interface WeblearnerRepository extends CrudRepository<Weblearner , Integer>{
 
 }				
-				
-				
-				
-				
-				
-				
-						
+
 						</pre>
 					</div>
 				</div>
@@ -232,12 +210,9 @@ public interface WeblearnerRepository extends CrudRepository<Weblearner
 				<h4>Weblearner Entity</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Weblearner class is annotated with <b>@Entity</b> which makes it a
-						model class for weblearner table. <b>@Id</b> annotation is used
-						refer primary key column in table.<b>@GeneratedValue</b> generate
-						unique value for primary key.
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						Weblearner class is annotated with <b>@Entity</b> which makes it a model class for weblearner
+						table. <b>@Id</b> annotation is used refer primary key column in table.<b>@GeneratedValue</b>
+						generate unique value for primary key. <pre class="brush: java; addmargin">
 
 @Entity(name = "weblearner")
 public class Weblearner {
@@ -256,10 +231,6 @@ public class Weblearner {
 	// setters and getters..
 	
 	}		
-				
-				
-				
-				
 				</pre>
 					</div>
 				</div>
@@ -268,9 +239,7 @@ public class Weblearner {
 				<h4>Spring Boot</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below class help us to start the Spring boot application.
-						<pre class="brush: java; addmargin"
-							style="background-color: white"> 
+						Below class help us to start the Spring boot application. <pre class="brush: java; addmargin"> 
 @SpringBootApplication
 public class SpringbootRestfulserviceApplication {
 
@@ -279,8 +248,7 @@ public class SpringbootRestfulserviceApplication {
 	}
 
 }
-			  
-			  </pre>
+			   </pre>
 					</div>
 				</div>
 
@@ -289,8 +257,8 @@ public class SpringbootRestfulserviceApplication {
 				<!--  Result Start -->
 				<h4>Result</h4>
 				<div class="row addmargin stepbystep">
-					<div class="col">Run the SpringBoot Application class and
-						invoke the specific URL for GET,POST,and DELETE</div>
+					<div class="col">Run the SpringBoot Application class and invoke the specific URL for
+						GET,POST,and DELETE</div>
 				</div>
 				<h4>Get Request</h4>
 				<div class="row addmargin stepbystep">
@@ -313,10 +281,9 @@ public class SpringbootRestfulserviceApplication {
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_restfulwebservice_mysql.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_restfulwebservice_mysql.git"> Click here
+							for download</a>
 					</div>
 				</div>
 
@@ -324,28 +291,26 @@ public class SpringbootRestfulserviceApplication {
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profile</a></li>
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>

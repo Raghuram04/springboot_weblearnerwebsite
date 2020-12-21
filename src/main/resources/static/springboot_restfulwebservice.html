@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -53,8 +49,7 @@ body {
 
 				<!-- Topic Heading Start -->
 
-				<h2>Spring Restful Service - Spring Boot example - CRUD
-					Operation</h2>
+				<h2>Spring Restful Service - Spring Boot example - CRUD Operation</h2>
 
 				<!-- Topic Heading end -->
 
@@ -63,12 +58,10 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">Representation state transfer(REST) is a
-						architectural style defines the rules for developing web services.
-						Webresource are mapped with URI and desired format of output are
-						exposed. The response can confirm that some alteration has been
-						made to the resource state . Various Http methods are available
-						GET,PUT,POST,DELETE,TRACE,OPTIONS etc.</div>
+					<div class="col">Representation state transfer(REST) is a architectural style defines the
+						rules for developing web services. Webresource are mapped with URI and desired format of
+						output are exposed. The response can confirm that some alteration has been made to the
+						resource state . Various Http methods are available GET,PUT,POST,DELETE,TRACE,OPTIONS etc.</div>
 				</div>
 
 				<!-- Overview End -->
@@ -78,10 +71,9 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, we have developed a restful
-						webservice using Spring Boot to perform
-						CRUD(CREATE,READ,UPDATE,DELETE) operations. We have developed a
-						dummy backend service to mimic the service behaviour.</div>
+					<div class="col">In this Demo, we have developed a restful webservice using Spring Boot
+						to perform CRUD(CREATE,READ,UPDATE,DELETE) operations. We have developed a dummy backend
+						service to mimic the service behaviour.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -108,11 +100,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop a restful service using
-						Spring Boot . Link to source code is available at the bottom of
-						the page
-						<textarea class="addmargin" cols="100" rows="15" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Below dependencies are enough to develop a restful service using Spring Boot . Link to source
+						code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="15" wrap="hard" disabled
+							style="overflow: auto; resize: none">
       <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -139,10 +130,8 @@ body {
 				<h4>Model</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have create a model class Employee which will be used in
-						different operations (GET,PUT,DELETE,POST)
-
-						<pre class="brush: java; addmargin">
+						We have create a model class Employee which will be used in different operations
+						(GET,PUT,DELETE,POST) <pre class="brush: java; addmargin">
 @Component
 public class Employee {
 
@@ -162,22 +151,15 @@ public class Employee {
 				<h4>RestController</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						EmployeeController class is annotated with <b>@RestController</b>
-						, so spring can identify the controller class. <b>@RequestMapping</b>
-						at the class level defines the URI path.<br> <br> <b>@GetMapping</b>
-						- maps the http GET request with the URI "/employee/{empid}".
-						@PathVariable gets the value from URI.<br> <b>@PostMapping</b>
-						- maps the http POST request with the URI "/employee".@RequestBody
-						gets the Employee Json object from the request. <br> <b>@PutMapping</b>
-						- maps the http PUT request with the URI
-						"/employee/{empid}".@PathVariable gets the value from URI. Its is
-						used to update the Employee Object state.<br> <b>@DeleteMapping</b>
-						- maps the http Delete request with the URI "/employee/{empid}".
-						@PathVariable gets the value from URI.Delete the employee based on
-						specified empid.
-
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						EmployeeController class is annotated with <b>@RestController</b> , so spring can identify the
+						controller class. <b>@RequestMapping</b> at the class level defines the URI path.<br> <br>
+						<b>@GetMapping</b> - maps the http GET request with the URI "/employee/{empid}". @PathVariable
+						gets the value from URI.<br> <b>@PostMapping</b> - maps the http POST request with the
+						URI "/employee".@RequestBody gets the Employee Json object from the request. <br> <b>@PutMapping</b>
+						- maps the http PUT request with the URI "/employee/{empid}".@PathVariable gets the value from
+						URI. Its is used to update the Employee Object state.<br> <b>@DeleteMapping</b> - maps
+						the http Delete request with the URI "/employee/{empid}". @PathVariable gets the value from
+						URI.Delete the employee based on specified empid. <pre class="brush: java; addmargin">
 @RestController
 @RequestMapping("/weblearner")
 public class EmployeeController {
@@ -224,9 +206,7 @@ public class EmployeeController {
 				<h4>Spring Boot</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below class help us to start the Spring boot application.
-						<pre class="brush: java; addmargin"
-							style="background-color: white"> 
+						Below class help us to start the Spring boot application. <pre class="brush: java; addmargin">
 
 @SpringBootApplication
 public class SpringbootRestfulserviceApplication {
@@ -236,8 +216,7 @@ public class SpringbootRestfulserviceApplication {
 	}
 
 }
-			  
-			  </pre>
+			    </pre>
 					</div>
 				</div>
 
@@ -246,8 +225,8 @@ public class SpringbootRestfulserviceApplication {
 				<!--  Result Start -->
 				<h4>Result</h4>
 				<div class="row addmargin stepbystep">
-					<div class="col">Run the SpringBoot Application class and
-						invoke the specific URL for GET,POST,PUT and DELETE</div>
+					<div class="col">Run the SpringBoot Application class and invoke the specific URL for
+						GET,POST,PUT and DELETE</div>
 				</div>
 				<h4>Get Request</h4>
 				<div class="row addmargin stepbystep">
@@ -258,8 +237,7 @@ public class SpringbootRestfulserviceApplication {
 				<h4>Post Request</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_restfulwebservice_post.PNG"
-							class="output"><br>
+						<img src="img/springboot_restfulwebservice_post.PNG" class="output"><br>
 					</div>
 				</div>
 				<h4>Put Request</h4>
@@ -271,17 +249,15 @@ public class SpringbootRestfulserviceApplication {
 				<h4>Delete Request</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_restfulwebservice_delete.PNG"
-							class="output">
+						<img src="img/springboot_restfulwebservice_delete.PNG" class="output">
 					</div>
 				</div>
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_resfulwebservice.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_resfulwebservice.git"> Click here for
+							download</a>
 					</div>
 				</div>
 
@@ -289,28 +265,26 @@ public class SpringbootRestfulserviceApplication {
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profile</a></li>
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>

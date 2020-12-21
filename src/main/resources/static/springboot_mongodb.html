@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -62,12 +58,10 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 					<div class="col">
-						MongoDB is a NOSQL Database which is very popular in the market
-						now. It stores the <b>Document</b> in <b>Collection</b>. Document
-						is a set of key-value pair. It can have any schema. Each document
-						can be different but can be placed in same Collection. Below are
-						some comparison between relational DB and Mongo DB terminology.<br>
-						<br>
+						MongoDB is a NOSQL Database which is very popular in the market now. It stores the <b>Document</b>
+						in <b>Collection</b>. Document is a set of key-value pair. It can have any schema. Each
+						document can be different but can be placed in same Collection. Below are some comparison
+						between relational DB and Mongo DB terminology.<br> <br>
 
 						<table class="table">
 							<thead>
@@ -98,9 +92,8 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this demo,we are going to create a
-						restful web service using spring boot and connect with MongoDB to
-						store and retrieve value.</div>
+					<div class="col">In this demo,we are going to create a restful web service using spring
+						boot and connect with MongoDB to store and retrieve value.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -116,9 +109,8 @@ body {
 							<li>Maven 3.3.9</li>
 							<li>Java 8</li>
 							<li>Eclipse</li>
-							<li>Mongo DB - <a
-								href="https://docs.mongodb.com/manual/installation/"
-								target="_blank">Installation Link</a></li>
+							<li>Mongo DB - <a href="https://docs.mongodb.com/manual/installation/" target="_blank">Installation
+									Link</a></li>
 						</ul>
 					</div>
 				</div>
@@ -130,10 +122,9 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Link to source code is available at the bottom of the page for
-						download.
-						<textarea class="addmargin" cols="20" rows="10" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Link to source code is available at the bottom of the page for download.
+						<textarea class="addmargin" cols="20" rows="8" wrap="hard" disabled
+							style="overflow: auto; resize: none">
       <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -151,15 +142,13 @@ body {
 				<h4>Controller</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have created a simple restful webservice to GET,POST and DELETE
-						record in MongoDB.For more details about restful service, please
-						check this link <a
-							href="http://localhost:8081/springboot_restfulwebservice.html"
-							target="_blank">Restful Service Details</a>.
+						We have created a simple restful webservice to GET,POST and DELETE record in MongoDB.For more
+						details about restful service, please check this link <a
+							href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Restful
+							Service Details</a>.
 						</ul>
 
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 				
 package com.weblearner.springboot;
 
@@ -200,8 +189,6 @@ public class StudentController {
 	}
 
 }
-
-				 
 </pre>
 					</div>
 				</div>
@@ -210,30 +197,25 @@ public class StudentController {
 				<h4>Repository</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are going to use Spring Repository class called <b>MongoRepository</b>.
-						This class provide basic methods to perform CRUD operations. Also
-						we can add custom methods to extract data from MongoDB. In the
-						below class, we will get the Student details by name and delete a
-						student document using name.
+						We are going to use Spring Repository class called <b>MongoRepository</b>. This class provide
+						basic methods to perform CRUD operations. Also we can add custom methods to extract data from
+						MongoDB. In the below class, we will get the Student details by name and delete a student
+						document using name.
 						</ul>
 
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import com.weblearner.springboot.model.Student;
 
 @Repository
-public interface StudentRepository extends MongoRepository<Student
-								, String> {
+public interface StudentRepository extends MongoRepository<Student , String> {
 
 	public Student findByName(String name);	
 	public void deleteByName(String name);
 
 }
-				
-				
-						
+
 						</pre>
 					</div>
 				</div>
@@ -241,12 +223,10 @@ public interface StudentRepository extends MongoRepository<Student
 				<h4>Model</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have created a Student Class to get student details which will
-						be used as a model class.
+						We have created a Student Class to get student details which will be used as a model class.
 						</ul>
 
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 package com.weblearner.springboot.model;
 
 public class Student {
@@ -287,14 +267,12 @@ public class Student {
 				<h4>DB Configuration</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We can provide the DB configuration details in the
-						application.properties file. This file contains information like
-						name of the database,host,port details. We can also pass
+						We can provide the DB configuration details in the application.properties file. This file
+						contains information like name of the database,host,port details. We can also pass
 						authentication details.
 						</ul>
 
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 spring.data.mongodb.database=weblearner
 spring.data.mongodb.host=localhost
 spring.data.mongodb.port=27017
@@ -310,8 +288,7 @@ logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
 				<!--  Result Start -->
 				<h4>Result:</h4>
 				<div class="row addmargin stepbystep">
-					<div class="col">Involve the below URL to validate the
-						application.</div>
+					<div class="col">Involve the below URL to validate the application.</div>
 				</div>
 				<h4>Get Call</h4>
 				<div class="row addmargin stepbystep">
@@ -336,10 +313,8 @@ logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_mongo.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_mongo.git"> Click here for download</a>
 					</div>
 				</div>
 
@@ -347,29 +322,26 @@ logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profile</a></li>
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>

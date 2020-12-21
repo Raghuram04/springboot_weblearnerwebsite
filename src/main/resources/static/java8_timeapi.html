@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -20,6 +17,7 @@
 		$("#header").load("header.html");
 		$("#footer").load("footer.html");
 		$("#author").load("author.html");
+		$("#java8_sidebar").load("java8_sidebar.html");
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
@@ -27,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -45,65 +42,64 @@ body {
 	<div id="header"></div>
 	<!--  Header End -->
 
-	<div class="container addmargin">
-
-		<!-- Topic Heading Start -->
-
-		<h2>Java8 Features - Time API </h2>
-
-		<!-- Topic Heading end -->
-
-		<!-- Overview Start -->
-		<div class="row addmargin overview"></div>
-
-		<div class="row addmargin overview">
-
-			<div class="col">
-				In this tutorial, We are going to see the <b>Time API </b>
-				introduced in Java8. We will cover the useful methods available with
-				this interface.
+	<div class="container-fluid addmargin">
+		<div class="row">
+			<div class="col-2 d-none d-md-block">
+				<div id="java8_sidebar"></div>
 			</div>
-		</div>
+			<div class="col-10">
 
-		<div class="row addmargin overview">
+				<!-- Topic Heading Start -->
 
-			<div class="col">
-				New Time API was introduced in Java 8 to reduce the complexity in
-				handling Date and Calendar features. In the new API, we have <b>LocalDate,LocalTime,Period,Duration
-				</b> classes with many simple method to do date manipulation.We will
-				show the example of all the class.
-			</div>
-		</div>
+				<h2>Java8 Features - Time API</h2>
 
-		<h4>New Date Classes</h4>
+				<!-- Topic Heading end -->
 
-		<div class="row addmargin overview">
+				<!-- Overview Start -->
+				<div class="row addmargin overview"></div>
 
-			<div class="col">
-				<ul>
-					<li><b>LocalDate : </b> Class have useful methods to get the
-						Current date and extract individual value.
-					<li><b>LocalTime : </b>Class have useful methods to get the
-						Current time and extract individual value.
-					<li><b>LocalDateTime : </b>Class have useful methods to get
-						the Current date and time and extract individual value.
-					<li><b>Period : </b> Class is generally used to get the
-						difference between two dates.
-					<li><b>Duration : </b>Class is generally used to get the
-						difference between two times.
-				</ul>
-			</div>
-		</div>
+				<div class="row addmargin overview">
 
-		<h4>Example for LocalDate</h4>
+					<div class="col">
+						In this tutorial, We are going to see the <b>Time API </b> introduced in Java8. We will cover
+						the useful methods available with this interface.
+					</div>
+				</div>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				We can get the current date value by using <b> LocalDate.now()</b>
-				or create a LocalDate object using <b>LocalDate.of(YEAR, MONTH,
-					DAY)</b>
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						New Time API was introduced in Java 8 to reduce the complexity in handling Date and Calendar
+						features. In the new API, we have <b>LocalDate,LocalTime,Period,Duration </b> classes with
+						many simple method to do date manipulation.We will show the example of all the class.
+					</div>
+				</div>
+
+				<h4>New Date Classes</h4>
+
+				<div class="row addmargin overview">
+
+					<div class="col">
+						<ul>
+							<li><b>LocalDate : </b> Class have useful methods to get the Current date and extract
+								individual value.
+							<li><b>LocalTime : </b>Class have useful methods to get the Current time and extract
+								individual value.
+							<li><b>LocalDateTime : </b>Class have useful methods to get the Current date and time
+								and extract individual value.
+							<li><b>Period : </b> Class is generally used to get the difference between two dates.
+							<li><b>Duration : </b>Class is generally used to get the difference between two times.
+						</ul>
+					</div>
+				</div>
+
+				<h4>Example for LocalDate</h4>
+
+				<div class="row addmargin overview">
+
+					<div class="col">
+						We can get the current date value by using <b> LocalDate.now()</b> or create a LocalDate
+						object using <b>LocalDate.of(YEAR, MONTH, DAY)</b> <pre class="brush: java; addmargin">
 		LocalDate localDate = LocalDate.now();
 
 		System.out.println("Current Local Date --> " + localDate);
@@ -116,18 +112,17 @@ body {
 		// Comparing date . Date are same if value is zero
 		System.out.println(preDefinedDate.compareTo(localDate));
 				</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<h4>Example for LocalTime</h4>
+				<h4>Example for LocalTime</h4>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				We can get the current time value by using <b> LocalTime.now()</b>
-				or create a LocalTime object using <b>LocalTime.of(HOUR, MINUTE,
-					SECOND, NANOSEC)</b>
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						We can get the current time value by using <b> LocalTime.now()</b> or create a LocalTime
+						object using <b>LocalTime.of(HOUR, MINUTE, SECOND, NANOSEC)</b> <pre
+							class="brush: java; addmargin">
 		LocalTime time = LocalTime.now();
 
 		System.out.println("Local Time -->" + time);
@@ -140,70 +135,66 @@ body {
 
 		System.out.println(preDefinedTime.compareTo(time));
 				</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<h4>Example for LocalTimeDate</h4>
+				<h4>Example for LocalTimeDate</h4>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				We can get the current date and time value by using <b>
-					LocalDateTime.now()</b>
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						We can get the current date and time value by using <b> LocalDateTime.now()</b> <pre
+							class="brush: java; addmargin">
               LocalDateTime dateTime = LocalDateTime.now();             
 				</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<h4>Example for Period</h4>
+				<h4>Example for Period</h4>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				Period class is used to find difference between two dates.It have <b>static</b>
-				methods to perform many actions like <b>between,from,ofDays,ofMonths
-					etc</b>
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						Period class is used to find difference between two dates.It have <b>static</b> methods to
+						perform many actions like <b>between,from,ofDays,ofMonths etc</b> <pre
+							class="brush: java; addmargin">
 				Period.between(preDefinedDate, localDate)
 				</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<h4>Example for Duration</h4>
+				<h4>Example for Duration</h4>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				Duration class is used to find difference between two times.It have
-				<b>static</b> methods to perform many actions like <b>between,from,ofDays,ofMonths
-					etc</b>
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						Duration class is used to find difference between two times.It have <b>static</b> methods to
+						perform many actions like <b>between,from,ofDays,ofMonths etc</b> <pre
+							class="brush: java; addmargin">
 				Duration.between(time,addedTime)
 				</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<h4>Example for ChronoUnit</h4>
+				<h4>Example for ChronoUnit</h4>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				ChronoUnit is a ENUM introduced in java8.DAY,MONTH,YEAR,HOURS,MINUTE
-				etc.We can use this ENUM for date manipulation.
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						ChronoUnit is a ENUM introduced in java8.DAY,MONTH,YEAR,HOURS,MINUTE etc.We can use this ENUM
+						for date manipulation. <pre class="brush: java; addmargin">
 				dateTime.plus(2, ChronoUnit.MONTHS)
 				dateTime.plus(2, ChronoUnit.YEARS)
 				</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<h4>Complete Code</h4>
+				<h4>Complete Code</h4>
 
-		<div class="row addmargin overview">
+				<div class="row addmargin overview">
 
-			<div class="col">
-				<pre class="brush: java; addmargin">
+					<div class="col">
+						<pre class="brush: java; addmargin">
 package com.weblearner.timeapi;
 
 import java.time.Duration;
@@ -260,16 +251,16 @@ public class TimeAPIExample {
 	}
 
 }</pre>
-			</div>
-		</div>
+					</div>
+				</div>
 
 
-		<h4>Result</h4>
-		<!-- Overview End -->
-		<div class="row addmargin">
+				<h4>Result</h4>
+				<!-- Overview End -->
+				<div class="row addmargin">
 
-			<div class="col">
-				<pre class="brush: java; addmargin">				
+					<div class="col">
+						<pre class="brush: java; addmargin">				
 Current Local Date --> 2020-10-18
 Current Month --> 10
 Current Day --> 18
@@ -287,36 +278,51 @@ Period between two dates -->P-1Y-13D
 Duration between two times -->PT1H
 </pre>
 
-			</div>
-		</div>
+					</div>
+				</div>
 
 
 
-		<!-- Result End -->
+				<!-- Result End -->
 
 
-		<h4>Related Links</h4>
-		<div class="row addmargin">
-			<div col="">
-				<ul>
-					<li><a href="http://localhost:8081/java8_foreach.html"
-						target="_blank">Java8 - forEach Iterator</a></li>
-					<li><a
-						href="http://localhost:8081/java8_defaultinterface.html"
-						target="_blank">Java8 - Default Method in Interface</a></li>
-					<li><a
-						href="http://localhost:8081/java8_functioninterface.html"
-						target="_blank">Java8 - Function Interface and Lambda</a></li>
-					<li><a href="http://localhost:8081/java8_stream.html"
-						target="_blank">Java8 - Streams</a></li>
-				</ul>
-
+				<div class="row addmargin">
+					<div class="col  d-block d-sm-none">
+						<h4>Related Links</h4>
+						<ul>
+							<li><a href="http://localhost:8081/java8_foreach.html" target="_blank">Java8 -
+									forEach Iterator</a></li>
+							<li><a href="http://localhost:8081/java8_functioninterface.html" target="_blank">Java8
+									- Function Interface and Lambda</a></li>
+							<li><a href="http://localhost:8081/java8_predicate.html" target="_blank">Java8 -
+									Predicate Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_consumer.html" target="_blank">Java8 -
+									Consumer Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_supplier.html" target="_blank">Java8 -
+									Supplier Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_function.html" target="_blank">Java8 -
+									Function Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_bipredicate.html" target="_blank">Java8 -
+									BiPredicate Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_biconsumer.html" target="_blank">Java8 -
+									BiConsumer Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_bifunction.html" target="_blank">Java8
+									- BiFunction Functional Interface</a></li>
+							<li><a href="http://localhost:8081/java8_stream.html" target="_blank">Java8 -
+									Streams</a></li>
+							<li><a href="http://localhost:8081/java8_timeapi.html" target="_blank">Java8 - Time
+									API</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div id="author"></div>
 		<br> <br>
 		<div id="footer"></div>
+
+
 
 
 

@@ -155,7 +155,7 @@ ENTRYPOINT ["java","-jar","/weblearner.jar"]
 				We are going to build the image of the webservice using Docker
 				commands and push to docker hub.
 
-				<pre class="brush: java; addmargin" style="background-color: white">
+				<pre class="brush: java; addmargin">
                  docker login
                  docker build -t weblearnerrepo:v1 .
                  docker tag weblearnerrepo:v1 raghuram04/weblearnerrepo
@@ -176,7 +176,7 @@ ENTRYPOINT ["java","-jar","/weblearner.jar"]
 				<h4>Pod Definition</h4>
 
 
-				<pre class="brush: java; addmargin" style="background-color: white">
+				<pre class="brush: java; addmargin">
 apiVersion: v1
 kind: Pod
 metadata:
@@ -192,7 +192,7 @@ spec:
 
 				<h4>Service Definition</h4>
 
-				<pre class="brush: java; addmargin" style="background-color: white">
+				<pre class="brush: java; addmargin">
 apiVersion: v1
 kind: Service
 metadata:
@@ -206,8 +206,7 @@ spec:
  selector:
   app: weblearner
   type: rest_service
-
-			  </pre>
+ </pre>
 			</div>
 
 			<img src="img/minikubedeployment.PNG" class="output">

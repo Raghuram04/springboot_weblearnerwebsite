@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -64,13 +60,11 @@ body {
 				<div class="row addmargin overview">
 
 					<div class="col">
-						Spring MVC is build around DispatcherServlet which will redirect
-						the request to corresponding handler to execute the business
-						logic. <b>@Controller </b> defines the Controller class which will
-						accept the request. <b>@RequestMapping</b> defines the request URI
-						for particular resource in back end.<b>@ModelAttribute</b> helps
-						to receive the submitting form value in the back end.<b>ModelAndView</b>
-						helps us to bind the model object with view. These are basic
+						Spring MVC is build around DispatcherServlet which will redirect the request to corresponding
+						handler to execute the business logic. <b>@Controller </b> defines the Controller class which
+						will accept the request. <b>@RequestMapping</b> defines the request URI for particular
+						resource in back end.<b>@ModelAttribute</b> helps to receive the submitting form value in the
+						back end.<b>ModelAndView</b> helps us to bind the model object with view. These are basic
 						element required develop as Spring MVC application.
 					</div>
 				</div>
@@ -82,9 +76,9 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this tutorial we are going to demonstrate
-						Spring MVC using Spring boot. We have created a simple
-						registration form and submit the request to back end controller.</div>
+					<div class="col">In this tutorial we are going to demonstrate Spring MVC using Spring
+						boot. We have created a simple registration form and submit the request to back end
+						controller.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -111,11 +105,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring MVC
-						application using Spring Boot . Link to source code is available
-						at the bottom of the page
-						<textarea class="addmargin" cols="100" rows="15" wrap="hard" w
-							disabled style="overflow: auto; resize: none">
+						Below dependencies are enough to develop the Spring MVC application using Spring Boot . Link
+						to source code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="15" wrap="hard" w disabled
+							style="overflow: auto; resize: none">
        <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -142,11 +135,8 @@ body {
 				<h4>Model</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We will create a Model class to transfer the data from view to
-						controller. In our case , we will create a User class with
-						required attribute
-
-						<pre class="brush: java; addmargin">
+						We will create a Model class to transfer the data from view to controller. In our case , we
+						will create a User class with required attribute <pre class="brush: java; addmargin">
 public class User {
 	
 	private String firstName;
@@ -164,16 +154,12 @@ public class User {
 				<h4>Controller</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Controller class will receive the request based on the URI. <b>@Controller</b>
-						annotation helps the Spring to identify the Controller class. We
-						have two <b>@RequestMapping</b> annotation, one at the class level
-						and another one at method level. This will define the URI path of
-						the request.When user hits /weblearner/home in browser,
-						getHomePage() will be called and ModelAndView object will couple
-						the view(registration.jsp) and model(User) object.
-
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						Controller class will receive the request based on the URI. <b>@Controller</b> annotation
+						helps the Spring to identify the Controller class. We have two <b>@RequestMapping</b>
+						annotation, one at the class level and another one at method level. This will define the URI
+						path of the request.When user hits /weblearner/home in browser, getHomePage() will be called
+						and ModelAndView object will couple the view(registration.jsp) and model(User) object. <pre
+							class="brush: java; addmargin">
 @Controller
 @RequestMapping("/weblearner")
 public class HomeController {
@@ -208,13 +194,11 @@ public class HomeController {
 				<h4>Views</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Views are simple jsp page with FORM to get the user data.
-						ModelAttribute in the FORM tag maps with User class.Make sure to
-						use same name as class attribute and path parameter.
+						Views are simple jsp page with FORM to get the user data. ModelAttribute in the FORM tag maps
+						with User class.Make sure to use same name as class attribute and path parameter.
 
 						<h6 class="addmargin">registration.jsp</h6>
-						<textarea cols="100" rows="20" disabled
-							style="overflow: auto; resize: none">	
+						<textarea cols="100" rows="18" disabled style="overflow: auto; resize: none">	
 	<form:form action="registration" modelAttribute="user">
 		<table>
 			<tr>
@@ -253,9 +237,7 @@ public class HomeController {
 				<h4>Spring Boot</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below class help us to start the Spring boot application.
-						<pre class="brush: java; addmargin"
-							style="background-color: white"> 
+						Below class help us to start the Spring boot application. <pre class="brush: java; addmargin">
 
 @SpringBootApplication
 public class SpringbootMvcApplication {
@@ -265,8 +247,7 @@ public class SpringbootMvcApplication {
 	}
 
 }
-			  
-			  </pre>
+  </pre>
 					</div>
 				</div>
 
@@ -288,10 +269,8 @@ public class SpringbootMvcApplication {
 				</div>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_mvc.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_mvc.git"> Click here for download</a>
 					</div>
 				</div>
 
@@ -299,29 +278,26 @@ public class SpringbootMvcApplication {
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profile</a></li>
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>

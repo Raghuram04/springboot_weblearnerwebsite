@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -62,9 +58,9 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 					<div class="col">
-						RestTemplate class in spring offers methods to invoke restful
-						service.This uses underlying JDK <b>HttpURLConnection</b> class to
-						make http request.It creates a new thread for each http request.
+						RestTemplate class in spring offers methods to invoke restful service.This uses underlying JDK
+						<b>HttpURLConnection</b> class to make http request.It creates a new thread for each http
+						request.
 					</div>
 				</div>
 
@@ -76,11 +72,10 @@ body {
 				<div class="row addmargin demodetails">
 
 					<div class="col">
-						In this Demo,we are going to see RestTemplate class used to invoke
-						4 different HTTP method GET/POST/PUT/DELETE. We have already
-						developed a <a target="_blank"
-							href="http://localhost:8081/springboot_restfulwebservice.html">CRUD
-							restful web service</a> which will be invoked here.
+						In this Demo,we are going to see RestTemplate class used to invoke 4 different HTTP method
+						GET/POST/PUT/DELETE. We have already developed a <a target="_blank"
+							href="http://localhost:8081/springboot_restfulwebservice.html">CRUD restful web service</a>
+						which will be invoked here.
 					</div>
 				</div>
 
@@ -108,9 +103,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Link to source code is available at the bottom of the page for
-						download. We just need web starter dependency.
-						<textarea class="addmargin" cols="20" rows="6" wrap="hard" disabled style="overflow: auto; resize: none">
+						Link to source code is available at the bottom of the page for download. We just need web
+						starter dependency.
+						<textarea class="addmargin" cols="20" rows="6" wrap="hard" disabled
+							style="overflow: auto; resize: none">
        <dependencies>		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -125,26 +121,21 @@ body {
 				<h4>RestTemplateExample</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are using different methods available in RestTemplate to invoke
-						the web service.
+						We are using different methods available in RestTemplate to invoke the web service.
 
 						<ul>
-							<li><b>getForEntity()</b> - This method makes a GET request
-								to the web service. We need to pass URL and return object type.</li>
-							<li><b>postForEntity()</b> - This method makes a POST
-								request to the web service. We need to pass URL, object to be
-								posted and return object type.</li>
-							<li><b>exchange()</b> - This method can be used for any HTTP
-								Methods.In this example we have used for PUT and Delete as we
-								need to pass query parameter. We have used <b>UriComponentsBuilder</b>
-								class to build the request URL and query parameter. This methods
-								takes UriComponentsBuilder object, HTTP methods name,
-								RequestEntity parameter if we need to pass header details and
+							<li><b>getForEntity()</b> - This method makes a GET request to the web service. We need
+								to pass URL and return object type.</li>
+							<li><b>postForEntity()</b> - This method makes a POST request to the web service. We
+								need to pass URL, object to be posted and return object type.</li>
+							<li><b>exchange()</b> - This method can be used for any HTTP Methods.In this example we
+								have used for PUT and Delete as we need to pass query parameter. We have used <b>UriComponentsBuilder</b>
+								class to build the request URL and query parameter. This methods takes UriComponentsBuilder
+								object, HTTP methods name, RequestEntity parameter if we need to pass header details and
 								expected return type object.</li>
 						</ul>
 
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 				
 package com.weblearner.springboot.resttemplate;
 
@@ -199,8 +190,6 @@ public class RestTemplateExample {
 	}
 
 }
-
-				 
 </pre>
 					</div>
 				</div>
@@ -216,8 +205,7 @@ public class RestTemplateExample {
 				<h4>Result:</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 				
 22:51:59.822 [main] DEBUG org.springframework.web.client.RestTemplate - HTTP GET http://localhost:8080/weblearner/employee/A1234
 22:51:59.941 [main] DEBUG org.springframework.web.client.RestTemplate - Accept=[application/json, application/*+json]
@@ -247,10 +235,8 @@ deleteResponse ->SUCCESS
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_resttemplate.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_resttemplate.git"> Click here for download</a>
 					</div>
 				</div>
 
@@ -258,28 +244,26 @@ deleteResponse ->SUCCESS
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profile</a></li>
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>

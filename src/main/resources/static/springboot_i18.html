@@ -49,7 +49,7 @@ body {
 
 				<!-- Topic Heading Start -->
 
-				<h2>Spring Boot - Actuator - Readiness Probe - Liveness Probe - Custom Probe Example</h2>
+				<h2>Spring Boot - Internationalization with restful webservice</h2>
 
 				<!-- Topic Heading end -->
 
@@ -58,12 +58,8 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">
-						Docker infrastructure comes with Readiness and Liveness probe to determine the health of the
-						application before serving traffic and while processing transactions. Spring Boot provides
-						inbuilt support for this feature. We just need to include <b>spring-boot-starter-actuator</b>
-						library. It also support custom health check.
-					</div>
+					<div class="col">Internationalization helps us to get the content in different language
+						based on customer location and helps to avoid redundant codes.</div>
 				</div>
 
 				<!-- Overview End -->
@@ -73,9 +69,8 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, we will show the implementation of Spring Actuator and
-						Custom build actuator to check the application health. Which can be later confirmed in Docker
-						infrastructure to monitor the application health</div>
+					<div class="col">In this Demo, We have created a restful service which will display
+						different language response based on customer Accept-Language parameter in request.</div>
 				</div>
 
 				<!-- Demo end -->
@@ -102,15 +97,11 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring MVC application using Spring Boot . Link
-						to source code is available at the bottom of the page
-						<textarea class="addmargin" cols="100" rows="10" wrap="hard" disabled
+						Below dependencies are enough to develop the Spring Restful application using Spring Boot .
+						Link to source code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="6" wrap="hard" disabled
 							style="overflow: auto; resize: none">
        <dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -122,102 +113,100 @@ body {
 
 				<!-- pom end -->
 
-				<h4>RestController</h4>
+				<h4>InternationalizationController</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are creating a simple Restful Service. We will invoke the method in this service through
-						our custom health check class. This ensure our service health before serving traffic from end
-						user. <pre class="brush: java; addmargin">
-				
+						We are creating a simple restful service which provide response based on customer <b>Accept-Language</b>
+						in input parameter.We use <b>LocaleContextHolder</b> class to identify the request type and
+						pick the correct language text.<pre class="brush: java; addmargin">
+						
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-public class ActuatorController {
-	
-	@RequestMapping("myService")
-	public String myService() {
-		return "Hello World";
-	}
+public class InternationalizationController {
 
-}
-				 
-</pre>
-					</div>
-				</div>
-
-
-				<h4>Custom Health Check</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						<b>CustomHealthChecker</b> class implements <b>HealthIndicator</b> interface and overrides the
-						health method. we can implement our logic here to check the system health. In this demo, we
-						will invoke the controller method directly. <pre class="brush: java; addmargin">
-				
-@Component
-public class CustomHealthChecker implements HealthIndicator{
-	
 	@Autowired
-	private ActuatorController controller;
+	private MessageSource messageSource;
 
-	@Override
-	public Health health() {	
-		System.out.println("Custom method is invoked");
-		String resposne = controller.myService();
-		System.out.println("Health check response"+ resposne);
-		if(resposne.equalsIgnoreCase("Hello World")) {
-			return Health.up().withDetail("status", "Service Works fine  !!!").build();
-		}		
-		return Health.down().withDetail("status", "Not Fully Ready !!!").build();
+	@RequestMapping("/i18")
+	public String welcomeMessage() {		
+		return messageSource.getMessage("welcome.message", null, LocaleContextHolder.getLocale());
 	}
 
 }
-				 
 </pre>
 					</div>
 				</div>
 
 
-				<h4>application.properties</h4>
+				<h4>Configuration Class</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Most of the Spring Actuator Service are enabled by default except shutdown. If we prefer to
-						enable only few monitoring we can disable the auto actuator service using <b>management.endpoints.enabled-by-default=false</b>
-						and then we can enable selected feature alone management.endpoint.
-						<id>.enabled=true <textarea class="addmargin" cols="100" rows="15" wrap="hard" disabled
-							style="overflow: auto; resize: none;">
-				
-## management.endpoints.enabled-by-default=true   
-## disable all actuator endpoint and we need to enable the required feature alone . By default all are enabled expect shutdown
+						<b>AcceptHeaderLocaleResolver</b> class is provided by Spring to identify the Accept Header
+						Language parameter in customer request. We have configured the bean in start up.Please see the
+						below code.<pre class="brush: java; addmargin">
+import java.util.Locale;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 
-## http://localhost:8080/actuator/health/    
-## http://localhost:8080/actuator/health/customHealthChecker -- Custom response
-## http://localhost:8080/actuator/health/readinessStateProbeIndicator   -- Kubenetes Readiness
-## http://localhost:8080/actuator/health/livenessStateProbeIndicator    -- Kubenetes Liveness
-
-
-## display custom message with health info
-
-management.endpoint.health.show-details: ALWAYS  
-management.health.probes.enabled=true
-
-	
-</textarea>
-					</div>
-				</div>
-
-
-				<h4>SpringBootApplication</h4>
-				<div class="row addmargin stepbystep">
-					<div class="col">
-						This class is used to start the Spring boot application. <pre class="brush: java; addmargin">
 @SpringBootApplication
-public class ActuatorApplication {
+public class SpringbootI18Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ActuatorApplication.class, args);
+		SpringApplication.run(SpringbootI18Application.class, args);
 	}
 
-}
- </pre>
+	@Bean
+	public LocaleResolver localResolver() {
+		AcceptHeaderLocaleResolver localResolver = new AcceptHeaderLocaleResolver();
+		localResolver.setDefaultLocale(Locale.US);
+		return localResolver;
+	}	
+}			 
+</pre>
+					</div>
+				</div>
+
+
+				<h4>Properties files</h4>
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						we have created multiple messages.properties for different language. Based on the accept
+						language parameter message will be loaded.
+
+						<h6>application.properties</h6>
+						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
+							style="overflow: auto; resize: none">
+spring.messages.basename=messages
+
+</textarea>
+
+						<h6>messages.properties</h6>
+						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
+							style="overflow: auto; resize: none">
+welcome.message= Welcome to web learner page
+</textarea>
+
+						<h6>messages_gr.properties</h6>
+						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
+							style="overflow: auto; resize: none">
+welcome.message= Willkommen auf der Web-Lernerseite
+
+</textarea>
+
+						<h6>messages_fr.properties</h6>
+						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
+							style="overflow: auto; resize: none">
+welcome.message=Bienvenue sur la page des apprenants Web
+</textarea>
 					</div>
 				</div>
 
@@ -227,31 +216,30 @@ public class ActuatorApplication {
 				<h4>Result:</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Hit the below endpoints in browser and see the response. <br>
+						Start the application and hit the below URL with different accept language parameter as shown
+						below
 						<ul>
-							<li>http://localhost:8080/actuator/health/</li>
-							<li>http://localhost:8080/actuator/health/customHealthChecker -- Custom response</li>
-							<li>http://localhost:8080/actuator/health/readinessStateProbeIndicator -- Kubenetes
-								Readiness</li>
-							<li>http://localhost:8080/actuator/health/livenessStateProbeIndicator -- Kubenetes
-								Liveness</li>
+							<li>http://localhost:8080/i18</li>
 						</ul>
-
-
-
 					</div>
 				</div>
 
-				<h4>Default health Check</h4>
+				<h4>Default Response</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_actuator_1.PNG" class="output"><br>
+						<img src="img/default_response.PNG" class="output">
 					</div>
 				</div>
-				<h4>Custom Health Check</h4>
+				<h4>German</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						<img src="img/springboot_actuator_2.PNG" class="output"><br>
+						<img src="img/gr_response.PNG" class="output"><br>
+					</div>
+				</div>
+				<h4>French</h4>
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						<img src="img/fr_response.PNG" class="output"><br>
 					</div>
 				</div>
 
@@ -265,9 +253,10 @@ public class ActuatorApplication {
 				<div class="row addmargin stepbystep">
 					<div class="col">
 						Source code for this demo is available in github for download in <a target="_blank"
-							href="https://github.com/Raghuram04/springboot_actuator.git"> Click here for download</a>
+							href="https://github.com/Raghuram04/springboot_i18.git"> Click here for download</a>
 					</div>
 				</div>
+
 
 				<div class="row addmargin stepbystep">
 					<div class="col d-block d-sm-none">
@@ -277,8 +266,9 @@ public class ActuatorApplication {
 									Boot Application Argument</a></li>
 							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
 									Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
-									Boot Profile</a></li>
+
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
 							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
 									MVC</a></li>
 							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
@@ -292,18 +282,13 @@ public class ActuatorApplication {
 							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
 									Boot MVC Security</a></li>
 							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
-									Boot Custom Validation</a></li>					
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
-
-
 
 	<!-- Footer Start -->
 	<div id="author"></div>

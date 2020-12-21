@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -28,8 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -62,9 +58,8 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">Spring provides more powerful,customizable
-						authentication and authorization features which can be turned on
-						for spring web based application or web service.</div>
+					<div class="col">Spring provides more powerful,customizable authentication and
+						authorization features which can be turned on for spring web based application or web service.</div>
 				</div>
 
 				<!-- Overview End -->
@@ -75,9 +70,8 @@ body {
 				<div class="row addmargin demodetails">
 
 					<div class="col">
-						In this Demo, we have developed a <b>Spring MVC</b> based
-						application and used <b>Spring Security</b> Module to provide
-						authentication and authorization.<b>WebSecurityConfigurerAdapter</b>
+						In this Demo, we have developed a <b>Spring MVC</b> based application and used <b>Spring
+							Security</b> Module to provide authentication and authorization.<b>WebSecurityConfigurerAdapter</b>
 						class provided by Spring help us with authentication feature.
 					</div>
 				</div>
@@ -106,11 +100,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop a spring mvc application
-						with security. Link to source code is available at the bottom of
-						the page
-						<textarea class="addmargin" cols="100" rows="15" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Below dependencies are enough to develop a spring mvc application with security. Link to
+						source code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="13" wrap="hard" disabled
+							style="overflow: auto; resize: none">
       <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -134,10 +127,9 @@ body {
 				<h4>Controller</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have created a simple controller class <b>HomeSecurityController</b>.Controller
-						exposes three methods to display home page, login page and Welcome
-						page.
-						<pre class="brush: java; addmargin">
+						We have created a simple controller class <b>HomeSecurityController</b>.Controller exposes
+						three methods to display home page, login page and Welcome page. <pre
+							class="brush: java; addmargin">
 package com.weblearner.springboot;
 
 import org.springframework.stereotype.Controller;
@@ -169,10 +161,7 @@ public class HomeSecurityController {
 		mv.setViewName("hello");
 		return mv;
 	}
-	
-
-
-}
+	}
 
 </pre>
 					</div>
@@ -183,24 +172,19 @@ public class HomeSecurityController {
 				<h4>Security Configuration</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We are going to configure authentication feature for the web
-						application by extending <b>WebSecurityConfigurerAdapter</b>. We
-						have used <b>@Configuration</b> and <b> @EnableWebSecurity</b>
-						annotation on the class for spring to identify this class has
-						spring web configuration class. We need to override below two
-						methods.
+						We are going to configure authentication feature for the web application by extending <b>WebSecurityConfigurerAdapter</b>.
+						We have used <b>@Configuration</b> and <b> @EnableWebSecurity</b> annotation on the class for
+						spring to identify this class has spring web configuration class. We need to override below
+						two methods.
 
 						<ul>
-							<li>userDetailsService() : In this method we will define the
-								user authentication and authorization details like name,password
-								and roles.</li>
-							<li>configure() : In this method we will define the URL path
-								which needed to be authenticated before granting access to the
-								web page.</li>
+							<li>userDetailsService() : In this method we will define the user authentication and
+								authorization details like name,password and roles.</li>
+							<li>configure() : In this method we will define the URL path which needed to be
+								authenticated before granting access to the web page.</li>
 						</ul>
 
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
+						<pre class="brush: java; addmargin">
 package com.weblearner.springboot;
 
 import org.springframework.context.annotation.Bean;
@@ -240,7 +224,6 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 	}
 
 }
-
 </pre>
 					</div>
 				</div>
@@ -250,9 +233,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 				<h4>Spring Boot</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below class help us to start the Spring boot application.
-						<pre class="brush: java; addmargin"
-							style="background-color: white"> 
+						Below class help us to start the Spring boot application. <pre class="brush: java; addmargin">
 
 package com.weblearner.springboot;
 
@@ -267,9 +248,7 @@ public class SpringbootMVCSecurityApplication {
 	}
 
 }
-
-			  
-			  </pre>
+ </pre>
 					</div>
 				</div>
 
@@ -278,8 +257,8 @@ public class SpringbootMVCSecurityApplication {
 				<!--  Result Start -->
 				<h4>Result</h4>
 				<div class="row addmargin stepbystep">
-					<div class="col">Run the SpringBoot Application class and hit
-						the below URL and follow the links.</div>
+					<div class="col">Run the SpringBoot Application class and hit the below URL and follow
+						the links.</div>
 				</div>
 				<h4>Home page</h4>
 				<div class="row addmargin stepbystep">
@@ -313,10 +292,8 @@ public class SpringbootMVCSecurityApplication {
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_mvcsecurity.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_mvcsecurity.git"> Click here for download</a>
 					</div>
 				</div>
 
@@ -324,29 +301,26 @@ public class SpringbootMVCSecurityApplication {
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a
-								href="http://localhost:8081/springboot_applicationargument.html"
-								target="_blank">Spring Boot Application Argument</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
+									Boot Application Argument</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profile</a></li>
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 
 						</ul>
 					</div>

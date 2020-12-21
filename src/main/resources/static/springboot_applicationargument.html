@@ -4,12 +4,9 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shCore.js"></script>
 <script type="text/javascript" src="js/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/shBrushJava.js"></script>
@@ -29,8 +26,7 @@
 <link type="text/css" rel="stylesheet" href="css/weblearner.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 body {
 	background-color: #ebebe0;
@@ -61,9 +57,9 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">Spring boot provides the feature to get the
-						application argument used during start up in the code.Command line
-						argument will overwrite the application.properties argument values</div>
+					<div class="col">Spring boot provides the feature to get the application argument used
+						during start up in the code.Command line argument will overwrite the application.properties
+						argument values</div>
 				</div>
 
 				<!-- Overview End -->
@@ -73,9 +69,8 @@ body {
 
 				<div class="row addmargin demodetails">
 
-					<div class="col">In this Demo, we will show the
-						implementation of accessing the command line argument in spring
-						class using ApplicationArguments</div>
+					<div class="col">In this Demo, we will show the implementation of accessing the command
+						line argument in spring class using ApplicationArguments</div>
 				</div>
 
 				<!-- Demo end -->
@@ -102,11 +97,10 @@ body {
 				<h4>pom.xml</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Below dependencies are enough to develop the Spring MVC
-						application using Spring Boot . Link to source code is available
-						at the bottom of the page
-						<textarea class="addmargin" cols="100" rows="7" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Below dependencies are enough to develop the Spring MVC application using Spring Boot . Link
+						to source code is available at the bottom of the page
+						<textarea class="addmargin" cols="100" rows="7" wrap="hard" disabled
+							style="overflow: auto; resize: none">
        <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -122,18 +116,12 @@ body {
 				<h4>SpringBoot Class</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We will access the application arguments using <b>@Value</b>
-						annotation in the code. SpringbootApplicationargsApplication
-						implements ApplicationRunner and overrides the <b>run(ApplicationArguments
-							args)</b> which will be executed in the start up. 3
-						parameters(name,location,port) are passed as the argument in the
-						startup. <b>server.port</b> is defined in the
-						application.properties with 8082. We will overwrite the value with
-						command line argument
-
-						<pre class="brush: java; addmargin"
-							style="background-color: white">
-				
+						We will access the application arguments using <b>@Value</b> annotation in the code.
+						SpringbootApplicationargsApplication implements ApplicationRunner and overrides the <b>run(ApplicationArguments
+							args)</b> which will be executed in the start up. 3 parameters(name,location,port) are passed as
+						the argument in the startup. <b>server.port</b> is defined in the application.properties with
+						8082. We will overwrite the value with command line argument <pre
+							class="brush: java; addmargin">				
 @SpringBootApplication
 public class SpringbootApplicationargsApplication implements ApplicationRunner {
 	
@@ -169,10 +157,9 @@ public class SpringbootApplicationargsApplication implements ApplicationRunner {
 				<h4>application.properties</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Including server.port in the application file. This value will be
-						overrided.
-						<textarea class="addmargin" cols="100" rows="2" wrap="hard"
-							disabled style="overflow: auto; resize: none">
+						Including server.port in the application file. This value will be overrided.
+						<textarea class="addmargin" cols="100" rows="2" wrap="hard" disabled
+							style="overflow: auto; resize: none">
 			server.port=8082	
             </textarea>
 					</div>
@@ -187,11 +174,9 @@ public class SpringbootApplicationargsApplication implements ApplicationRunner {
 				<div class="row addmargin stepbystep">
 					<div class="col">
 						<h4>Result:</h4>
-						<br>Please see the log during start up. server.port value is
-						replaced as 8085 instead of 8082.Run below command while building
-						<br> <b>$ mvn spring-boot:run
-							-Dspring-boot.run.arguments="--name=Test --location=US
-							--server.port=8085" </b><br>
+						<br>Please see the log during start up. server.port value is replaced as 8085 instead of
+						8082.Run below command while building <br> <b>$ mvn spring-boot:run
+							-Dspring-boot.run.arguments="--name=Test --location=US --server.port=8085" </b><br>
 
 					</div>
 
@@ -201,29 +186,27 @@ public class SpringbootApplicationargsApplication implements ApplicationRunner {
 					<div class="col d-block d-sm-none">
 						<h4>Related Links</h4>
 						<ul>
-							<li><a href="http://localhost:8081/springboot_profile.html"
-								target="_blank">Spring Boot Profiles</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_lazyinitialization.html"
-								target="_blank">Spring Boot Lazy Loading</a></li>
+							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
+									Boot Profiles</a></li>
+							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
+									Boot Lazy Loading</a></li>
 
-							<li><a href="http://localhost:8081/springboot_actuator.html"
-								target="_blank">Spring Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html"
-								target="_blank">Spring Boot MVC</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice.html"
-								target="_blank">Spring Boot Restful Service</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
+							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
+									Boot Actuator</a></li>
+							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
+									MVC</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
+									Boot Restful Service</a></li>
+							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
 								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html"
-								target="_blank">Spring Boot Restful Service with MongoDB</a></li>
-							<li><a
-								href="http://localhost:8081/springboot_resttemplate.html"
-								target="_blank">Spring RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html"
-								target="_blank">Spring Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
+									Boot Restful Service with MongoDB</a></li>
+							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
+									RestTemplate</a></li>
+							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
+									Boot MVC Security</a></li>
+							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
+									Boot Custom Validation</a></li>
 						</ul>
 					</div>
 				</div>
@@ -237,10 +220,9 @@ public class SpringbootApplicationargsApplication implements ApplicationRunner {
 
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Source code for this demo is available in github for download in <a
-							target="_blank"
-							href="https://github.com/Raghuram04/springboot_applicationargument.git">
-							Click here for download</a>
+						Source code for this demo is available in github for download in <a target="_blank"
+							href="https://github.com/Raghuram04/springboot_applicationargument.git"> Click here for
+							download</a>
 					</div>
 				</div>
 			</div>

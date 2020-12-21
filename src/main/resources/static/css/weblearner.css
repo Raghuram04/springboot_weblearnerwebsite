@@ -11,7 +11,13 @@ div {
 }
 
 textarea {
-	background-color: white;
+	background-color: black;
+	color: white;
+}
+
+pre[class^="brush"] {
+	background-color: black;
+	color: white;	
 }
 
 .flex-wrap {
@@ -20,10 +26,6 @@ textarea {
 
 .output {
 	width: 80%;
-}
-
-pre {
-	background-color: white;
 }
 
 .addmargin {
@@ -37,7 +39,7 @@ pre {
 }
 
 textarea {
-	width: 100%;	
+	width: 100%;
 }
 
 #siteheader {
