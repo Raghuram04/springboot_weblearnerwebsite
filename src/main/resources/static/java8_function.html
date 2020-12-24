@@ -4,6 +4,7 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image" href="img/favicon.jpg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,6 +19,8 @@
 		$("#footer").load("footer.html");
 		$("#author").load("author.html");
 		$("#java8_sidebar").load("java8_sidebar.html");
+		$("#mobile_sidebar").load("mobile_java8_sidebar.html");
+
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
@@ -27,9 +30,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
-body {
-	background-color: #ebebe0;
-}
+
 
 .flex-wrap {
 	background-color: #ebebe0;
@@ -98,7 +99,8 @@ Function<List
 							<String>, List<String>> topLang = stringLst -> stringLst.subList(0, 2);
 topLang.apply(langLst)
 						
-</pre>
+
+						</pre>
 					</div>
 				</div>
 				<div class="row addmargin overview">
@@ -120,6 +122,7 @@ Function<List
 							<String>, Integer> sizeLst = stringLst -> stringLst.size();	
 
 topLang.andThen(sizeLst).apply(langLst);
+						
 						</pre>
 					</div>
 				</div>
@@ -154,39 +157,14 @@ public class FunctionFunctionalInterface {
 	}
 
 }
-	</pre>
+	
+						</pre>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row addmargin">
-		<div class="col  d-block d-sm-none">
-			<h4>Related Links</h4>
-			<ul>
-				<li><a href="http://localhost:8081/java8_foreach.html" target="_blank">Java8 - forEach
-						Iterator</a></li>
-				<li><a href="http://localhost:8081/java8_functioninterface.html" target="_blank">Java8
-						- Function Interface and Lambda</a></li>
-				<li><a href="http://localhost:8081/java8_predicate.html" target="_blank">Java8 -
-						Predicate Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_consumer.html" target="_blank">Java8 -
-						Consumer Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_supplier.html" target="_blank">Java8 -
-						Supplier Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_function.html" target="_blank">Java8 -
-						Function Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_bipredicate.html" target="_blank">Java8 -
-						BiPredicate Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_biconsumer.html" target="_blank">Java8 -
-						BiConsumer Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_bifunction.html" target="_blank">Java8
-						- BiFunction Functional Interface</a></li>
-				<li><a href="http://localhost:8081/java8_stream.html" target="_blank">Java8 - Streams</a></li>
-				<li><a href="http://localhost:8081/java8_timeapi.html" target="_blank">Java8 - Time API</a></li>
-			</ul>
-		</div>
-	</div>
+	<div id="mobile_sidebar"></div>
 	<div id="author"></div>
 	<br>
 	<br>

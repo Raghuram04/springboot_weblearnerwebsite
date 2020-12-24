@@ -4,6 +4,7 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image" href="img/favicon.jpg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,6 +19,7 @@
 		$("#footer").load("footer.html");
 		$("#author").load("author.html");
 		$("#sidebar").load("sidebar.html");
+		$("#mobile").load("mobile_springboot_sidebar.html");
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
@@ -27,9 +29,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
-body {
-	background-color: #ebebe0;
-}
 </style>
 </head>
 
@@ -76,7 +75,7 @@ body {
 					<div class="col">
 						In this Demo, We are going to see <b>SimpleAsyncTaskExecutor</b> and <b>SyncTaskExecutor</b>.SimpleAsyncTaskExecutor
 						will generate new thread for each invocation.We can also set the concurrency
-						limit.SyncTaskExecutor will use the calling method thread only. Its is used in mostly in the
+						limit.SyncTaskExecutor will use the calling method thread only. Its is used  mostly in the
 						scenario where multithreading is not required.
 					</div>
 				</div>
@@ -107,7 +106,7 @@ body {
 					<div class="col">
 						Below dependencies are enough to develop the Spring based task and scheduler . Link to source
 						code is available at the bottom of the page
-						<textarea class="addmargin" cols="100" rows="6" wrap="hard" disabled
+						<textarea class="addmargin" cols="100" rows="4" wrap="hard" disabled
 							style="overflow: auto; resize: none">
        	<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -172,7 +171,7 @@ public class MyTaskScheduler {
 				<h4>SpringbootTaskandscheduleApplication</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Spring boot starter class which is used to start the application. <pre
+						Spring boot starter class  is used to start the application. <pre
 							class="brush: java; addmargin">
 package com.weblearner.springboot;
 
@@ -197,7 +196,7 @@ public class SpringbootTaskandscheduleApplication {
 				<h4>Result</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We can clear see, AsynTaskExecutor create new thread for each execution where as
+						We can clear see, AsynTaskExecutor creates new thread for each execution where as
 						SyncTaskExecutor uses the same thread of the method invocation. <pre
 							class="brush: java; addmargin">
 Current Time14:21:52.882
@@ -236,34 +235,7 @@ Thread name scheduling-1
 				</div>
 
 
-				<div class="row addmargin stepbystep">
-					<div class="col d-block d-sm-none">
-						<h4>Related Links</h4>
-						<ul>
-							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
-									Boot Application Argument</a></li>
-							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
-									Boot Lazy Loading</a></li>
-
-							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
-									Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
-									MVC</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
-									Boot Restful Service</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
-								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
-									Boot Restful Service with MongoDB</a></li>
-							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
-									RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
-									Boot MVC Security</a></li>
-							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
-									Boot Custom Validation</a></li>
-						</ul>
-					</div>
-				</div>
+				<div id="mobile"></div>
 			</div>
 		</div>
 	</div>

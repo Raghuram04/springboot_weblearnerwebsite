@@ -1,5 +1,10 @@
+body {
+	background-color: #e6e6ff !important;
+	line-height: 1.6;
+}
+
 div {
-	font-family: "Times New Roman", Times, serif;
+	font-family: "Helvetica,Arial,Freesans,Clean,Sans-serif";
 }
 
 #sidebar {
@@ -9,6 +14,7 @@ div {
 .col {
 	font-size: 18px;
 }
+
 
 textarea {
 	background-color: black;
@@ -35,7 +41,7 @@ pre[class^="brush"] {
 
 .card-header {
 	font-weight: bold;
-	background-color: #ccddff;
+  /*background-color: #ccddff; */
 }
 
 textarea {

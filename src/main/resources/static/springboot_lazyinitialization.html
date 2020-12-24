@@ -4,6 +4,7 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image" href="img/favicon.jpg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,6 +19,7 @@
 		$("#footer").load("footer.html");
 		$("#author").load("author.html");
 		$("#sidebar").load("sidebar.html");
+		$("#mobile").load("mobile_springboot_sidebar.html");
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
@@ -27,9 +29,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
-body {
-	background-color: #ebebe0;
-}
+
 </style>
 </head>
 
@@ -258,34 +258,7 @@ Hello
 					</div>
 				</div>
 
-				<div class="row addmargin stepbystep">
-					<div class="col d-block d-sm-none">
-						<h4>Related Links</h4>
-						<ul>
-							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
-									Boot Profiles</a></li>
-							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
-									Boot Application Argument</a></li>
-
-							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
-									Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
-									MVC</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
-									Boot Restful Service</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
-								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
-									Boot Restful Service with MongoDB</a></li>
-							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
-									RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
-									Boot MVC Security</a></li>
-							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
-									Boot Custom Validation</a></li>
-						</ul>
-					</div>
-				</div>
+			<div id="mobile"></div>
 
 
 				<div class="row addmargin stepbystep">

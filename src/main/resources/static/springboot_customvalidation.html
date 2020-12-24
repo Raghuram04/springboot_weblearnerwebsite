@@ -4,6 +4,7 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image" href="img/favicon.jpg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,6 +19,7 @@
 		$("#footer").load("footer.html");
 		$("#author").load("author.html");
 		$("#sidebar").load("sidebar.html");
+		$("#mobile").load("mobile_springboot_sidebar.html");
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
@@ -27,9 +29,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
-body {
-	background-color: #ebebe0;
-}
+
 </style>
 
 </head>
@@ -60,7 +60,7 @@ body {
 
 					<div class="col">Spring provides a valuable feature to validate the request body object
 						and throw the validation error up front before processing the request. This feature help us to
-						avoid to many validation class as spring provides more inbuilt functions. Also Spring allow us
+						avoid  many validation class, as spring provides more inbuilt functions. Also Spring allow us
 						to create custom validation and custom error message.</div>
 				</div>
 
@@ -159,7 +159,7 @@ public class EmployeeController {
 				<h4>Model</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						This is a model class which will be passed by the user a input to the web service. We have 3
+						This is a model class which will be passed by the user as a input to the web service. We have 3
 						fields in this class. We are using two inbuilt function <b>@NotBlank and @Size</b> provided by
 						Spring. One custom function called <b>@NameCheck</b>. We will see how to create custom
 						function in this tutorial.<b>@NotBlank</b> check whether given input is not empty. <b>@Size</b>
@@ -228,8 +228,8 @@ public class Employee implements Serializable {
 						We need to define an interface and validation class to create a custom validation. Interface
 						will be the annotation which we use in model class(@NameCheck).Validation class defines the
 						type of validation on the input parameter. In our example, we are validating only <b>empName</b>
-						field, so <b>@Target</b>will have element type as <b>FIELD</b>. This also make sure that
-						NameCheck annotation can be used only on top of fields. We can use on any String fields.<pre
+						field, so <b>@Target</b> will have element type as <b>FIELD</b>. This also make sure that
+						NameCheck annotation can be used only on top of fields. We can use  any String fields.<pre
 							class="brush: java; addmargin">
 package com.weblearner.springboot.validator;
 
@@ -279,8 +279,8 @@ public class NameValidator implements ConstraintValidator<NameCheck , String> {
 				<h4>Custom Error Message</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						By default, Spring will throw a default error response when validation failure occurs. Most of
-						the scenario we might need to create a custom error message with more clear details about the
+						By default, Spring will throw a default error response when validation failure occurs.In most of
+						the scenarios, we might need to create a custom error message with more clear details about the
 						error. We can use <b>@ControllerAdvice</b> annotation to create a custom message whenever <b>MethodArgumentNotValidException</b>
 						happens.<pre class="brush: java; addmargin">
 package com.weblearner.springboot.validator;
@@ -393,32 +393,7 @@ deptName.notblank=MSG04~~Department Name can't be blank
 					</div>
 				</div>
 
-				<div class="row addmargin stepbystep">
-					<div class="col d-block d-sm-none">
-						<h4>Related Links</h4>
-						<ul>
-							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
-									Boot Application Argument</a></li>
-							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
-									Boot Lazy Loading</a></li>
-							<li><a href="http://localhost:8081/springboot_profile.html" target="_blank">Spring
-									Boot Profile</a></li>
-							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
-									Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
-									MVC</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
-									Boot Restful Service</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
-								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
-									Boot Restful Service with MongoDB</a></li>
-							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
-									RestTemplate</a></li>
-
-						</ul>
-					</div>
-				</div>
+				<div id="mobile"></div>
 			</div>
 
 		</div>

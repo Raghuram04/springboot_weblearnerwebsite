@@ -4,6 +4,7 @@
 <title>WebLearner</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image" href="img/favicon.jpg">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,6 +19,7 @@
 		$("#footer").load("footer.html");
 		$("#author").load("author.html");
 		$("#sidebar").load("sidebar.html");
+		$("#mobile").load("mobile_springboot_sidebar.html");
 	});
 </script>
 <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
@@ -27,9 +29,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
-body {
-	background-color: #ebebe0;
-}
+
 </style>
 </head>
 
@@ -58,8 +58,8 @@ body {
 				<h4>Overview</h4>
 				<div class="row addmargin overview">
 
-					<div class="col">H2 Database is a Java SQL Database and Open Source. It is can used as
-						in-memory database. Spring boot support for h2 database.</div>
+					<div class="col">H2 Database is a Java SQL Database and Open Source. It can be used as
+						in-memory database. Spring boot supports  h2 database.</div>
 				</div>
 
 				<!-- Overview End -->
@@ -124,7 +124,7 @@ body {
 				<h4>StudentController</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						This is simple restful webservice which get the student id and pull the student response from
+						This is simple restful webservice which gets the student id and pulls the student response from
 						h2 database.<pre class="brush: java; addmargin">
 @RestController
 @RequestMapping("/student")
@@ -221,7 +221,7 @@ public class Student implements Serializable{
 				<h4>data.sql</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						We have create data.sql in resource folder. Since we are creating this DB as in-memory,runtime
+						We have created data.sql in resource folder. Since we are creating this DB as in-memory,runtime
 						database. we will lose the data when we restart the application. so we will be creating table
 						and loading initial data.
 						<pre class="brush: java; addmargin">
@@ -239,7 +239,7 @@ INSERT INTO STUDENT(name ,dept ) VALUES('Ram','Civil');
 				<h4>H2databaseApplication</h4>
 				<div class="row addmargin stepbystep">
 					<div class="col">
-						Spring boot starter class which is used to start the application.
+						Spring boot starter class  is used to start the application.
 						<pre class="brush: java; addmargin">
 @SpringBootApplication
 public class H2databaseApplication {
@@ -277,34 +277,7 @@ public class H2databaseApplication {
 				</div>
 
 
-				<div class="row addmargin stepbystep">
-					<div class="col d-block d-sm-none">
-						<h4>Related Links</h4>
-						<ul>
-							<li><a href="http://localhost:8081/springboot_applicationargument.html" target="_blank">Spring
-									Boot Application Argument</a></li>
-							<li><a href="http://localhost:8081/springboot_lazyinitialization.html" target="_blank">Spring
-									Boot Lazy Loading</a></li>
-
-							<li><a href="http://localhost:8081/springboot_actuator.html" target="_blank">Spring
-									Boot Actuator</a></li>
-							<li><a href="http://localhost:8081/springboot_mvc.html" target="_blank">Spring Boot
-									MVC</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice.html" target="_blank">Spring
-									Boot Restful Service</a></li>
-							<li><a href="http://localhost:8081/springboot_restfulwebservice_mysql.html"
-								target="_blank">Spring Boot Restful Service with MYSQL</a></li>
-							<li><a href="http://localhost:8081/springboot_mongodb.html" target="_blank">Spring
-									Boot Restful Service with MongoDB</a></li>
-							<li><a href="http://localhost:8081/springboot_resttemplate.html" target="_blank">Spring
-									RestTemplate</a></li>
-							<li><a href="http://localhost:8081/springboot_security.html" target="_blank">Spring
-									Boot MVC Security</a></li>
-							<li><a href="http://localhost:8081/springboot_customvalidation.html" target="_blank">Spring
-									Boot Custom Validation</a></li>
-						</ul>
-					</div>
-				</div>
+				<div id="mobile"></div>
 			</div>
 		</div>
 	</div>
