@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Kubernetes(k8s) Multi Container Pod</title>
+<script data-ad-client="ca-pub-2241064956868524" async
+	src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Kubernetes(k8s) Multi Container Pod">
+<meta property="og:image" content="https://myweblearner.com/img/kubernetes.jpg">
+<meta property="og:description"
+	content="In this tutorial, We are going to learn about Kubenetes using minikube. Basic command to create kubetenes object">
+<link rel="icon" type="image" href="img/favicon.jpg">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+		$("#mobilebar").load("mobile_kubernetes_sidebar.html");
+		$("#sidebar").load("kubernetes_sidebar.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SF88BT9PVW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SF88BT9PVW');
+</script>
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+	<div class="container-fluid addmargin">
+		<div class="row">
+			<div class="col-2 d-none d-md-block">
+				<div id="sidebar"></div>
+			</div>
+			<div class="col-10">
+				<!-- Topic Heading Start -->
+				<h1>Kubernetes(k8s) Multi Container Pod</h1>
+				<!-- Topic Heading end -->
+				<!-- Overview Start -->
+
+				<h4>Overview</h4>
+				<div class="row addmargin demodetails">
+					<div class="col">We can have more than one container in a POD. In most of the scenario, we
+						create individual POD for each container. For some cases,  both containers are dependent on
+						each other like utility class for main service. Both the containers will go down if POD goes
+						down.</div>
+				</div>
+
+				<h4>About Demo</h4>
+				<div class="row addmargin demodetails">
+					<div class="col">In this tutorial, we are going to learn about creating pod with multiple
+						containers.</div>
+				</div>
+
+				<h4>Prerequisite</h4>
+				<div class="row addmargin prerequisite">
+					<ul>
+						<li>Oracle Virtual Box - <a href="https://www.virtualbox.org/manual/ch02.html">
+								Installation Link</a></li>
+						<li>Minikube & Kubectl- <a href="https://kubernetes.io/docs/tasks/tools/">
+								Installation Link</a></li>
+					</ul>
+
+				</div>
+				<h4>pod-definition-multi.yaml</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						We have given two containers in the pod definition file. Just for example , we are giving the
+						same image with different container name. <pre class="brush: java; addmargin">
+apiVersion: v1
+kind: Pod
+metadata:
+ name: multi-cont-pod
+ labels:
+  app: multi-cont-pod
+  type: service
+spec:
+ containers:
+  - name: service-pod
+    image: nginx
+  - name: utility-pod
+    image: nginx
+						</pre>
+					</div>
+				</div>
+				<h4>Start Minikube</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						Open command prompt and navigate to the location where we have minikube.exe. Run the below
+						command to start the minikube in virtual machine.
+						<ul>
+							<li>minikube start --vm-driver=virtualbox</li>
+						</ul>
+
+					</div>
+				</div>
+				<h4>Multi Container Pod Creation</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						We have saved the above yaml as pod-definition-multi.yaml. We will use create command to
+						create the pod as shown below
+						<ul style="font-weight: bold">
+							<li>kubectl create -f pod-definition-multi.yaml</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/multi-pod-1.PNG" class="output">
+					</div>
+				</div>
+
+				<h4>Log check</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						We can check the log of each container seperately. Please use the below command.
+						<ul style="font-weight: bold">
+							<li>kubectl logs multi-cont-pod -c utility-pod</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/multi-pod-1.PNG" class="output">
+					</div>
+				</div>
+
+				
+
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						Source code for this demo is available in github for download <a target="_blank"
+							href="https://github.com/Raghuram04/Kubernetes_Tutorial.git"> Click here for download</a>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+	<div id="mobilebar"></div>
+	<div id="author"></div>
+	<br>
+	<br>
+	<div id="footer"></div>
+	<!-- Footer End -->
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>

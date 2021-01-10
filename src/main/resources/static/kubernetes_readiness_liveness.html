@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Kubernetes(k8s) Readiness and Liveness Probe</title>
+<script data-ad-client="ca-pub-2241064956868524" async
+	src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Kubernetes(k8s) Readiness and Liveness Probe">
+<meta property="og:image" content="https://myweblearner.com/img/kubernetes.jpg">
+<meta property="og:description"
+	content="In this tutorial, We are going to learn about Kubenetes using minikube. Basic command to create kubetenes object">
+<link rel="icon" type="image" href="img/favicon.jpg">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+		$("#mobilebar").load("mobile_kubernetes_sidebar.html");
+		$("#sidebar").load("kubernetes_sidebar.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SF88BT9PVW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SF88BT9PVW');
+</script>
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+	<div class="container-fluid addmargin">
+		<div class="row">
+			<div class="col-2 d-none d-md-block">
+				<div id="sidebar"></div>
+			</div>
+			<div class="col-10">
+				<!-- Topic Heading Start -->
+				<h1>Kubernetes(k8s) Readiness and Liveness Probe</h1>
+				<!-- Topic Heading end -->
+				<!-- Overview Start -->
+
+				<h4>Overview</h4>
+				<div class="row addmargin demodetails">
+					<div class="col">
+						Based on health of the application running inside the pod, we can decide to keep the pod up or
+						reboot it. Liveness and Readiness probe help us to check the status of the POD.<b>Readiness</b>
+						probe is executed before the pod start serving the actual traffic and <b>Liveness</b> probe
+						helps to monitor the running pod.Based on the response of monitoring, we can spin up new pods.
+					</div>
+				</div>
+
+				<h4>About Demo</h4>
+				<div class="row addmargin demodetails">
+					<div class="col">In this tutorial, we are going to learn about Readiness and Liveness
+						Probe.</div>
+				</div>
+
+				<h4>Prerequisite</h4>
+				<div class="row addmargin prerequisite">
+					<ul>
+						<li>Oracle Virtual Box - <a href="https://www.virtualbox.org/manual/ch02.html">
+								Installation Link</a></li>
+						<li>Minikube & Kubectl- <a href="https://kubernetes.io/docs/tasks/tools/">
+								Installation Link</a></li>
+					</ul>
+
+				</div>
+				<h4>Start Minikube</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						Open command prompt and navigate to the location where we have minikube.exe. Run the below
+						command to start the minikube in virtual machine.
+						<ul>
+							<li>minikube start --vm-driver=virtualbox</li>
+						</ul>
+
+					</div>
+				</div>
+				<h4>Restful Webservice</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						To demonstrate Liveness and Readiness Probe, we have created a test method, which throws error
+						after 10 runs. <a href="https://myweblearner.com/springboot_minikube_restfulwebservice">How
+							to deploy a Spring boot application to minikube is covered in different page.</a> SpringBoot
+						provides inbuilt function called <a href="https://myweblearner.com/springboot_actuator">actuator</a>
+						to support readiness and liveness check. We have created custom function to demonstrate the
+						example.<pre class="brush: java; addmargin">
+package com.weblearner.springboot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.weblearner.springboot.model.Employee;
+import com.weblearner.springboot.service.EmployeeService;
+
+/*
+ * RestFul webservice using Spring boot to perform CRUD * 
+ * Dummy Service is created to mimic the backend service.
+ * 
+ */
+
+@RestController
+@RequestMapping("/weblearner")
+public class EmployeeController {
+
+	@Autowired
+	private EmployeeService dummyService;
+
+	private static int counter = 0;
+
+	@GetMapping("/health")
+	public ResponseEntity<String> healthTest() {
+
+		System.out.println("Counter" + counter);
+		counter = counter + 1;
+		if (counter < 10) {
+			System.out.println("Success");
+			return new ResponseEntity<>("Success", HttpStatus.OK);
+		} else {
+			System.out.println("Faiure");
+			return new ResponseEntity<>("Health is bad", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
+	// Get the employee detail based on employee id
+
+	@GetMapping("/employee/{empid}")
+	public Employee getEmployee(@PathVariable("empid") String empId) {
+		return dummyService.getEmployee(empId);
+	}
+
+
+}
+						</pre>
+					</div>
+				</div>
+
+
+
+				<h4>weblearner-pod.yaml</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						We have specified both liveness and readiness probe in this definition file.Readiness probe
+						check whether port 8085 is open and liveness probe will check the /health endpoint. <b>initialDelaySeconds</b>
+						specify the delay interval of the probe once the POD is up.<b>periodSeconds</b> specify the
+						time interval/frequency.<pre class="brush: java; addmargin">
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels: 
+    app: weblearner
+    type: rest_service
+  name: weblearner
+spec: 
+  containers: 
+    - 
+      image: raghuram04/myweblearner
+      livenessProbe: 
+        failureThreshold: 1
+        httpGet: 
+          path: /weblearner/health
+          port: 8085
+        initialDelaySeconds: 10
+        periodSeconds: 10
+      name: weblearner
+      readinessProbe: 
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        tcpSocket: 
+          port: 8085
+						</pre>
+					</div>
+				</div>
+
+
+				<div class="row addmargin execute">
+					<div class="col">
+						Run the below command to create POD and validate. You can check the log and also <b>kubectl
+							describe pod weblearner</b> to see that POD will be restarted once Liveness Probe start to fail.
+						<ul>
+							<li>kubectl create -f weblearner-pod.yaml</li>
+						</ul>
+
+
+					</div>
+				</div>
+
+				<h4>Liveness Probe</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/liveprobe_1.PNG" class="output">
+					</div>
+				</div>
+
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/liveprobe_2.PNG" class="output">
+					</div>
+				</div>
+
+				<h4>Readiness Probe</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/readiness_1.PNG" class="output">
+					</div>
+				</div>
+
+
+
+
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						Source code for this demo is available in github for download <a target="_blank"
+							href="https://github.com/Raghuram04/Kubernetes_Tutorial.git"> Click here for download</a>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+	<div id="mobilebar"></div>
+	<div id="author"></div>
+	<br>
+	<br>
+	<div id="footer"></div>
+	<!-- Footer End -->
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>

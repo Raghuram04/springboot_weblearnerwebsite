@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Kubernetes(k8s) Persistent Volume and Claim</title>
+<script data-ad-client="ca-pub-2241064956868524" async
+	src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Kubernetes(k8s) Persistent Volume and Claim">
+<meta property="og:image" content="https://myweblearner.com/img/kubernetes.jpg">
+<meta property="og:description"
+	content="In this tutorial, We are going to learn about Kubenetes using minikube. Basic command to create kubetenes object">
+<link rel="icon" type="image" href="img/favicon.jpg">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+		$("#mobilebar").load("mobile_kubernetes_sidebar.html");
+		$("#sidebar").load("kubernetes_sidebar.html");
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SF88BT9PVW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SF88BT9PVW');
+</script>
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+	<div class="container-fluid addmargin">
+		<div class="row">
+			<div class="col-2 d-none d-md-block">
+				<div id="sidebar"></div>
+			</div>
+			<div class="col-10">
+				<!-- Topic Heading Start -->
+				<h1>Kubernetes(k8s) Persistent Volume and Claim</h1>
+				<!-- Topic Heading end -->
+				<!-- Overview Start -->
+
+				<h4>Overview</h4>
+				<div class="row addmargin demodetails">
+					<div class="col">
+						Persistent Volume(PV) are piece of storage in the cluster with independent life cycle of POD.
+						Persistent Volume are used to save content which need to persist irrespective of Pod life
+						cycle. In Kubernetes, Volume is a 3 step process. <br>
+						<ul>
+							<li>Create the Persistent Volume(PV)</li>
+							<li>Create the Persistent Volume claim(PVC) to Persistent Volume(PV)</li>
+							<li>Use the PVC in pod definition</li>
+						</ul>
+					</div>
+				</div>
+
+				<h4>About Demo</h4>
+				<div class="row addmargin demodetails">
+					<div class="col">In this tutorial, we are going to learn about Persistent Volume(PV) and
+						Persistent Volume Claim(PVC). We wil use the volume in our pod.</div>
+				</div>
+
+				<h4>Prerequisite</h4>
+				<div class="row addmargin prerequisite">
+					<ul>
+						<li>Oracle Virtual Box - <a href="https://www.virtualbox.org/manual/ch02.html">
+								Installation Link</a></li>
+						<li>Minikube & Kubectl- <a href="https://kubernetes.io/docs/tasks/tools/">
+								Installation Link</a></li>
+					</ul>
+
+				</div>
+				<h4>Start Minikube</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						Open command prompt and navigate to the location where we have minikube.exe. Run the below
+						command to start the minikube in virtual machine.
+						<ul>
+							<li>minikube start --vm-driver=virtualbox</li>
+						</ul>
+
+					</div>
+				</div>
+				<h4>volume.yaml</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						Below is the template for volume. Key element for volume are <b>capacity</b> which tells the
+						size of the volume.<b>accessModes</b> access modes to the volume.<b>storageClassName</b>
+						defines the class of storage, backup style and quality.<b>hostPath</b> defines the path of
+						volume. In most of cases, we will using external volume like nfs,AWS etc. Just for this demo,
+						we will use host itself.<pre class="brush: java; addmargin">
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: myvol
+spec:
+  capacity:
+    storage: 10Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: slow
+  hostPath:
+    path: /tmp
+						</pre>
+					</div>
+				</div>
+
+				<h4>volume_claim.yaml</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						Below is the template for volume claim. Key element for volume are <b>accessModes</b> access
+						modes to the volume.it should be same as PV.<b>storageClassName</b> defines the class of
+						storage, backup style and quality.<b>resources</b> defines the required storage we are
+						claiming from the PV.<pre class="brush: java; addmargin">
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Mi
+  storageClassName: slow
+						</pre>
+					</div>
+				</div>
+
+				<h4>PV and PVC Creation</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						Same like regular pod creation we can use create command to create new job.
+						<ul style="font-weight: bold">
+							<li>kubectl create -f volume.yaml</li>
+							<li>kubectl create -f volume_claim.yaml</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/volume_1.PNG" class="output">
+					</div>
+				</div>
+
+				<h4>pod-defintion-volume.yaml</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						Below is the template for pod with volume. Key element are <b>volumeMounts</b> which specify
+						the mountPath with in the POD directory.<b>volumes</b> specify the volume claim to be used.<pre
+							class="brush: java; addmargin">
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumepod
+spec:
+  containers:
+    - name: mypod
+      image: nginx
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: myvolume
+  volumes:
+    - name: myvolume
+      persistentVolumeClaim:
+        claimName: myclaim
+						</pre>
+					</div>
+				</div>
+
+				<h4>Pod Creation</h4>
+				<div class="row addmargin execute">
+					<div class="col">
+						Same like regular pod creation we can use create command to create new cronjob.
+						<ul style="font-weight: bold">
+							<li>kubectl create -f pod-definition-volume.yaml</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row addmargin execute">
+					<div class="col">
+						<img src="img/volume_2.PNG" class="output">
+					</div>
+				</div>
+
+
+
+
+				<div class="row addmargin stepbystep">
+					<div class="col">
+						Source code for this demo is available in github for download <a target="_blank"
+							href="https://github.com/Raghuram04/Kubernetes_Tutorial.git"> Click here for download</a>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+	<div id="mobilebar"></div>
+	<div id="author"></div>
+	<br>
+	<br>
+	<div id="footer"></div>
+	<!-- Footer End -->
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>

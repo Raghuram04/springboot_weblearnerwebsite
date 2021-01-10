@@ -15,7 +15,6 @@ div {
 	font-size: 18px;
 }
 
-
 textarea {
 	background-color: black;
 	color: white;
@@ -23,7 +22,7 @@ textarea {
 
 pre[class^="brush"] {
 	background-color: black;
-	color: white;	
+	color: white;
 }
 
 .flex-wrap {
@@ -41,7 +40,7 @@ pre[class^="brush"] {
 
 .card-header {
 	font-weight: bold;
-  /*background-color: #ccddff; */
+	background-color: white;
 }
 
 textarea {

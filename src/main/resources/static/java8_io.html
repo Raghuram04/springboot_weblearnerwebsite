@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Java8 Features - BiFunction Interface</title>
+<script data-ad-client="ca-pub-2241064956868524" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Java8 Features - BiFunction Interface">
+<meta property="og:image" content="https://myweblearner.com/img/java8.jpg">
+<meta property="og:description" content="In this tutorial, We are going to learn about BiFunction Functional Interface which was introduced as part of Java 8">
+<link rel="icon" type="image" href="img/favicon.jpg">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shAutoloader.js"></script>
+<script>
+	$(function() {
+		$("#header").load("header.html");
+		$("#footer").load("footer.html");
+		$("#author").load("author.html");
+		$("#java8_sidebar").load("java8_sidebar.html");
+		$("#mobile_sidebar").load("mobile_java8_sidebar.html");
+		
+		
+	});
+</script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+<link type="text/css" rel="stylesheet" href="css/weblearner.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+.flex-wrap {
+	background-color: #ebebe0;
+}
+</style>
+</head>
+<body>
+	<!--  Header Start -->
+	<div id="header"></div>
+	<!--  Header End -->
+	<div class="container-fluid addmargin">
+		<div class="row">
+			<div class="col-2 d-none d-md-block">
+				<div id="java8_sidebar"></div>
+			</div>
+			<div class="col-10">
+				<!-- Topic Heading Start -->
+				<h1>Java8 Features - BiFunction Interface</h1>
+				<!-- Topic Heading end -->
+				<!-- Overview Start -->
+				<div class="row addmargin overview"></div>
+				<div class="row addmargin overview">
+					<div class="col">
+						In this tutorial, We are going to learn about <b>BiFunction Functional Interface</b> which was
+						introduced as part of Java 8. As learned in previous tutorial about <a
+							href="https://myweblearner.com/java8_functioninterface">Functional Interface</a>, we have only one abstract
+						method in Predicate Function Interface called <b>apply(Object, Object)</b>.
+					</div>
+				</div>
+				<h4>Methods in Function</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>MethodName</th>
+									<th>type</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tr>
+								<td>apply(Object, Object)</td>
+								<td>abstract</td>
+								<td>Apply the function to give inputs</td>
+							</tr>
+							<tr>
+								<td>andThen(Function&lt;? super R,? extends V&gt; after)</td>
+								<td>default</td>
+								<td>Chain multiple function together. Apply the first BiFunction to given input and
+									second Function on the evaluated response.</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<h4>Example and explanation</h4>
+				<div class="row addmargin overview">
+					<div class="col">
+						<ul>
+							<li><h4>apply(T t,U u)</h4></li>
+						</ul>
+						<b>Interface BiFunction&lt;T ,U ,R&gt;</b> where T,U are input parameter and R is the return
+						type.In the below example, we are concating two string together. <pre
+							class="brush: java; addmargin">
+BiFunction<String , String, String> fullNameFunction = (firstName, lastName) -> firstName + " " + lastName;
+fullNameFunction.apply("John", "Peter");
+						</pre>
+					</div>
+				</div>
+				<div class="row addmargin overview">
+					<div class="col">
+						<ul>
+							<li><h4>andThen(Function&lt;? super R,? extends V&gt; after)</h4></li>
+						</ul>
+						<pre class="brush: java; addmargin">
+BiFunction<String , String, String> fullNameFunction = (firstName, lastName) -> firstName + " " + lastName;
+Function<String , Integer> lengthFunction = (fullName) -> fullName.length();	
+fullNameFunction.andThen(lengthFunction).apply("John", "Peter");
+						</pre>
+					</div>
+				</div>
+
+				<div class="row addmargin overview">
+					<div class="col">
+						<h4>Complete Code For Function</h4>
+						<pre class="brush: java; addmargin">	
+package com.weblearner.functionallambda;
+
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+public class BiFunctionFunctionInterface {
+
+	public static void main(String[] args) {
+
+		BiFunction<String , String, String> fullNameFunction = (firstName, lastName) -> firstName + " " + lastName;
+		Function<String , Integer> lengthFunction = (fullName) -> fullName.length();
+
+		System.out.println("FullName -> " + fullNameFunction.apply("John", "Peter"));
+		System.out.println("Length Of FullName -> " + fullNameFunction.andThen(lengthFunction).apply("John", "Peter"));
+
+	}
+
+}					</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="mobile_sidebar"></div>
+	<div id="author"></div>
+	<br>
+	<br>
+	<div id="footer"></div>
+	<!-- Footer End -->
+	<script type="text/javascript">
+		SyntaxHighlighter.all();
+	</script>
+</body>
+</html>
